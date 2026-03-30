@@ -273,6 +273,14 @@ body::before{
 .field-edit-btn:hover{opacity:1;background:var(--purple-l)}
 .sg-field-row:hover .field-edit-btn{display:inline-block}
 .sg-field-row{display:flex;align-items:center;}
+/* Image zoom */
+.img-zoomable{cursor:zoom-in;transition:transform .15s;}
+.img-zoomable:hover{opacity:.9;}
+#imgZoomOverlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:9999;align-items:center;justify-content:center;cursor:zoom-out;}
+#imgZoomOverlay.on{display:flex;}
+#imgZoomOverlay img{max-width:90vw;max-height:90vh;object-fit:contain;border-radius:12px;box-shadow:0 8px 40px rgba(0,0,0,.6);}
+#imgZoomOverlay .zm-close{position:absolute;top:18px;right:22px;color:#fff;font-size:28px;cursor:pointer;font-weight:700;line-height:1;opacity:.8;}
+#imgZoomOverlay .zm-close:hover{opacity:1;}
 .mandala-side{display:flex;flex-direction:column;gap:12px;max-height:80vh;overflow-y:auto;scrollbar-width:thin}
 .cluster-btn-row{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:4px}
 
@@ -747,6 +755,9 @@ textarea{resize:vertical;line-height:1.6;min-height:72px}
         <span id="badgeText">Connect Google Sheets</span>
       </div>
       <button class="vis-btn" onclick="openMoVisibility()" title="Show / hide sections">⚙️ Sections</button>
+      <button class="admin-btn" id="userSignInBtn" onclick="openUserAuth()" style="background:var(--purple-l);border-color:var(--eve);color:var(--eve);">
+        <span id="userSignInIcon">👤</span><span id="userSignInLabel">Sign In</span>
+      </button>
       <button class="admin-btn" id="adminBtn" onclick="openAdmin()">
         <span>🔐</span><span id="adminBtnText">Admin</span>
       </button>
@@ -1019,9 +1030,29 @@ textarea{resize:vertical;line-height:1.6;min-height:72px}
               style="border:none;background:transparent;padding:2px 0;box-shadow:none;font-size:14px;font-weight:500;color:var(--mid);width:44px;">
           </div>
         </div>
-        <div class="sg-voicetxt">
-          <label class="cp"><input type="checkbox" name="pref_voice"><span style="border-radius:8px;padding:5px 12px;font-size:12px;background:#e8f0e6;border:1px solid #6dd08a;color:#2d6b3a;">📞 Voice</span></label>
-          <label class="cp"><input type="checkbox" name="pref_text"><span style="border-radius:8px;padding:5px 12px;font-size:12px;background:#e0f4f8;border:1px solid #60b8d0;color:#1f5f6e;">💬 Text</span></label>
+        <div class="sg-voicetxt" style="flex-direction:column;gap:6px;align-items:flex-start;">
+          <div style="font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--light);margin-bottom:2px;">Preferred Contact</div>
+          <div style="display:flex;gap:6px;flex-wrap:wrap;">
+            <label class="cp" title="Mark Voice as preferred">
+              <input type="radio" name="pref_contact" value="voice">
+              <span id="prefVoiceBtn" style="border-radius:8px;padding:5px 12px;font-size:12px;background:#e8f0e6;border:1.5px solid #6dd08a;color:#2d6b3a;display:flex;align-items:center;gap:4px;">
+                <span class="pref-star" style="color:#ccc;font-size:13px;transition:color .15s;">★</span> 📞 Voice
+              </span>
+            </label>
+            <label class="cp" title="Mark Text as preferred">
+              <input type="radio" name="pref_contact" value="text">
+              <span id="prefTextBtn" style="border-radius:8px;padding:5px 12px;font-size:12px;background:#e0f4f8;border:1.5px solid #60b8d0;color:#1f5f6e;display:flex;align-items:center;gap:4px;">
+                <span class="pref-star" style="color:#ccc;font-size:13px;transition:color .15s;">★</span> 💬 Text
+              </span>
+            </label>
+            <label class="cp" title="Mark Email as preferred">
+              <input type="radio" name="pref_contact" value="email">
+              <span id="prefEmailBtn" style="border-radius:8px;padding:5px 12px;font-size:12px;background:#f3e8ff;border:1.5px solid #c9a0f5;color:#4a1470;display:flex;align-items:center;gap:4px;">
+                <span class="pref-star" style="color:#ccc;font-size:13px;transition:color .15s;">★</span> ✉ Email
+              </span>
+            </label>
+          </div>
+          <div style="font-size:10px;color:var(--light);font-style:italic;">★ tap to mark preferred</div>
         </div>
         <div class="sg-emailbox">
           <label class="sg-field-label" style="text-align:right;display:block;">E-mail address ✉</label>
@@ -1076,11 +1107,7 @@ textarea{resize:vertical;line-height:1.6;min-height:72px}
             <input type="text" name="org" placeholder="Company or practice name"
               style="border:none;border-bottom:1px solid var(--border);background:transparent;padding:2px 0;box-shadow:none;font-size:12px;color:var(--mid);width:100%;">
           </div>
-          <div class="f" style="margin-top:4px;width:100%;">
-            <label class="sg-field-label" style="font-size:10px;">Role in Org</label>
-            <input type="text" name="org_role" placeholder="e.g., Founder, Practitioner"
-              style="border:none;border-bottom:1px solid var(--border);background:transparent;padding:2px 0;box-shadow:none;font-size:12px;color:var(--mid);width:100%;">
-          </div>
+
 
         </div>
         <!-- MIDDLE: Name fields -->
@@ -1091,36 +1118,9 @@ textarea{resize:vertical;line-height:1.6;min-height:72px}
           <label class="sg-field-label" style="margin-top:6px;display:block;">Role / Title</label>
           <input type="text" name="role_title" placeholder="e.g., Holistic Business Coach"
             style="border:none;background:transparent;padding:2px 0;box-shadow:none;font-size:13px;color:var(--mid);width:100%;">
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:6px;align-items:end;">
-            <div>
-              <label class="sg-field-label" style="display:block;">Pronouns</label>
-              <input type="text" name="pronouns" placeholder="e.g., she/her"
-                style="border:none;background:transparent;padding:2px 0;box-shadow:none;font-size:13px;color:var(--mid);width:100%;">
-            </div>
-            <div>
-              <label class="sg-field-label" style="display:block;">Birthday</label>
-              <div style="display:flex;gap:4px;">
-                <select name="bday_month" style="flex:1;border:none;border-bottom:1px solid var(--border);background:transparent;padding:2px 0;box-shadow:none;font-size:12px;color:var(--mid);">
-                  <option value="">Month</option>
-                  <option value="January">Jan</option><option value="February">Feb</option>
-                  <option value="March">Mar</option><option value="April">Apr</option>
-                  <option value="May">May</option><option value="June">Jun</option>
-                  <option value="July">Jul</option><option value="August">Aug</option>
-                  <option value="September">Sep</option><option value="October">Oct</option>
-                  <option value="November">Nov</option><option value="December">Dec</option>
-                </select>
-                <select name="bday_day" style="flex:1;border:none;border-bottom:1px solid var(--border);background:transparent;padding:2px 0;box-shadow:none;font-size:12px;color:var(--mid);">
-                  <option value="">Day</option>
-                  <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
-                  <option>6</option><option>7</option><option>8</option><option>9</option><option>10</option>
-                  <option>11</option><option>12</option><option>13</option><option>14</option><option>15</option>
-                  <option>16</option><option>17</option><option>18</option><option>19</option><option>20</option>
-                  <option>21</option><option>22</option><option>23</option><option>24</option><option>25</option>
-                  <option>26</option><option>27</option><option>28</option><option>29</option><option>30</option><option>31</option>
-                </select>
-              </div>
-            </div>
-          </div>
+          <label class="sg-field-label" style="margin-top:6px;display:block;">Pronouns</label>
+          <input type="text" name="pronouns" placeholder="e.g., she/her, they/them, he/him"
+            style="border:none;background:transparent;padding:2px 0;box-shadow:none;font-size:13px;color:var(--mid);width:100%;">
           <label class="sg-field-label" style="margin-top:6px;display:block;">Location</label>
           <input type="text" name="location" placeholder="City, State"
             style="border:none;background:transparent;padding:2px 0;box-shadow:none;font-size:13px;color:var(--mid);width:100%;">
@@ -2930,7 +2930,87 @@ textarea{resize:vertical;line-height:1.6;min-height:72px}
   <button class="tab" data-p="inbox" id="inboxTab" onclick="go('inbox')" style="display:none;position:relative">📥 Inbox<span id="inboxBadge" style="display:none;position:absolute;top:4px;right:4px;background:#e74c3c;color:#fff;border-radius:8px;font-size:9px;font-weight:700;padding:1px 5px;min-width:16px;text-align:center;line-height:14px"></span></button>
 </div>
 
+<!-- Image Zoom Overlay -->
+<div id="imgZoomOverlay" onclick="closeImgZoom()">
+  <span class="zm-close" onclick="closeImgZoom()">✕</span>
+  <img id="imgZoomTarget" src="" alt="Enlarged image">
+</div>
+
 <!-- MODALS -->
+
+<!-- ══ USER AUTH MODAL ══ -->
+<div class="mo" id="moUserAuth">
+  <div class="mo-box" style="max-width:460px;">
+    <button class="mo-close" onclick="closeMo('moUserAuth')">✕</button>
+    <h2 id="userAuthTitle">✨ Sign In to SoulSpark</h2>
+    <p style="font-size:13px;color:var(--mid);margin-bottom:18px;" id="userAuthSubtitle">Sign in to add, edit, or delete your entries.</p>
+
+    <!-- Tab switcher -->
+    <div style="display:flex;gap:0;margin-bottom:20px;border:1px solid var(--border);border-radius:10px;overflow:hidden;">
+      <button id="authTabSignIn" onclick="switchAuthTab('signin')"
+        style="flex:1;padding:9px 6px;text-align:center;font-size:12px;font-weight:700;background:var(--eve-l);color:var(--eve);border:none;cursor:pointer;font-family:'Jost',sans-serif;border-right:1px solid var(--border);">
+        Sign In
+      </button>
+      <button id="authTabCreate" onclick="switchAuthTab('create')"
+        style="flex:1;padding:9px 6px;text-align:center;font-size:12px;font-weight:700;background:var(--warm);color:var(--mid);border:none;cursor:pointer;font-family:'Jost',sans-serif;">
+        Create Account
+      </button>
+    </div>
+
+    <!-- Sign In Panel -->
+    <div id="authPanelSignin">
+      <div class="f" style="margin-bottom:12px;">
+        <label>Email Address</label>
+        <input type="email" id="siEmail" placeholder="your@email.com" style="width:100%;box-sizing:border-box;">
+      </div>
+      <div class="f" style="margin-bottom:16px;">
+        <label>PIN (4–8 digits)</label>
+        <input type="password" id="siPin" placeholder="••••" maxlength="8" inputmode="numeric" style="width:100%;box-sizing:border-box;" onkeydown="if(event.key==='Enter')signIn()">
+      </div>
+      <div id="siError" style="font-size:12px;color:#c0392b;margin-bottom:10px;min-height:16px;"></div>
+      <button onclick="signIn()" class="mo-btn primary" style="width:100%;font-size:14px;padding:12px;">Sign In ✦</button>
+    </div>
+
+    <!-- Create Account Panel -->
+    <div id="authPanelCreate" style="display:none;">
+      <div class="f" style="margin-bottom:12px;">
+        <label>Your Name</label>
+        <input type="text" id="caName" placeholder="First name or display name" style="width:100%;box-sizing:border-box;">
+      </div>
+      <div class="f" style="margin-bottom:12px;">
+        <label>Email Address</label>
+        <input type="email" id="caEmail" placeholder="your@email.com" style="width:100%;box-sizing:border-box;">
+      </div>
+      <div class="f" style="margin-bottom:12px;">
+        <label>Choose a PIN (4–8 digits)</label>
+        <input type="password" id="caPin" placeholder="••••" maxlength="8" inputmode="numeric" style="width:100%;box-sizing:border-box;">
+      </div>
+      <div class="f" style="margin-bottom:16px;">
+        <label>Confirm PIN</label>
+        <input type="password" id="caPinConfirm" placeholder="••••" maxlength="8" inputmode="numeric" style="width:100%;box-sizing:border-box;" onkeydown="if(event.key==='Enter')createAccount()">
+      </div>
+      <div id="caError" style="font-size:12px;color:#c0392b;margin-bottom:10px;min-height:16px;"></div>
+      <button onclick="createAccount()" class="mo-btn primary" style="width:100%;font-size:14px;padding:12px;">Create Account ✦</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ MY PROFILE MODAL ══ -->
+<div class="mo" id="moMyProfile">
+  <div class="mo-box" style="max-width:420px;">
+    <button class="mo-close" onclick="closeMo('moMyProfile')">✕</button>
+    <h2>👤 My Account</h2>
+    <div id="myProfileContent" style="font-size:13px;color:var(--mid);line-height:2;"></div>
+    <div style="display:flex;gap:10px;margin-top:18px;">
+      <button onclick="go('people');closeMo('moMyProfile');" class="mo-btn primary" style="flex:1;">➕ Add My Profile</button>
+      <button onclick="signOut()" class="mo-btn" style="flex:1;background:#fce8e8;color:#c0392b;border-color:#c0392b;">Sign Out</button>
+    </div>
+    <div style="margin-top:14px;">
+      <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--light);margin-bottom:8px;">My Entries</div>
+      <div id="myEntriesList" style="max-height:200px;overflow-y:auto;"></div>
+    </div>
+  </div>
+</div>
 <div class="mo" id="moSetup">
   <div class="mo-box" style="max-width:520px">
     <button class="mo-close" onclick="closeMo('moSetup')">✕</button>
@@ -3808,6 +3888,13 @@ function collectData(form, section) {
     var specHidden = document.getElementById('specialty_tags_val');
     if(specHidden && specHidden.value) d.specialty_tags = specHidden.value;
   }
+  // Tag the record with signed-in user
+  var curUser = getCurrentUser();
+  if(curUser) {
+    d._user_email = curUser.email;
+    d._user_name  = curUser.name;
+    d._user_token = curUser.token;
+  }
   // Attach shows flyer
   if(section==='shows') {
     var fb64 = document.getElementById('showFlyerB64');
@@ -4199,6 +4286,9 @@ function previewImg(input,labelId,iconId,b64Id,mimeId) {
     var l=document.getElementById(labelId);
     l.style.backgroundImage='url('+ev.target.result+')';
     l.style.backgroundSize='cover';
+    l.style.cursor='zoom-in';
+    l.title='Click to enlarge';
+    l.onclick=function(e){ if(!e.target.closest('input')) openImgZoom(ev.target.result); };
     document.getElementById(iconId).style.display='none';
     var hint=document.getElementById('photoHintText'); if(hint) hint.style.display='none';
     if(b64Id) document.getElementById(b64Id).value=ev.target.result.split(',')[1]||'';
@@ -4214,6 +4304,9 @@ function previewLogo(input,labelId,iconId,b64Id,mimeId) {
     l.style.backgroundImage='url('+ev.target.result+')';
     l.style.backgroundSize='contain';
     l.style.backgroundRepeat='no-repeat';
+    l.style.cursor='zoom-in';
+    l.title='Click to enlarge';
+    l.onclick=function(e){ if(!e.target.closest('input')) openImgZoom(ev.target.result); };
     document.getElementById(iconId).style.display='none';
     var hint=document.getElementById('logoHintText'); if(hint) hint.style.display='none';
     if(b64Id) document.getElementById(b64Id).value=ev.target.result.split(',')[1]||'';
@@ -5931,7 +6024,10 @@ function showPersonDetail(i) {
   if (!p) return;
   var recs = getRecsFor(p.name || '');
   var ownerToken = localStorage.getItem(PPL_OWNER_KEY) || '';
-  var isOwner = p._owner_token && p._owner_token === ownerToken;
+  var curUser    = getCurrentUser();
+  var isOwner    = adminUnlocked ||
+                   (p._owner_token && p._owner_token === ownerToken) ||
+                   (curUser && p._user_email && p._user_email === curUser.email);
 
   var seeking = [];
   if(p.seeking_mentor) seeking.push('&#127891; Mentor');
@@ -5950,8 +6046,9 @@ function showPersonDetail(i) {
   }).join('') : '<p style="font-size:12px;color:var(--light);font-style:italic;">No recommendations yet.</p>';
 
   var actionsHtml = '<div style="border-top:1px solid var(--border);margin-top:14px;padding-top:12px;display:flex;gap:8px;flex-wrap:wrap;">' +
-      '<button onclick="editPersonEntry(&quot;' + p._timestamp + '&quot;)" style="background:var(--ppl);color:#fff;border:none;border-radius:8px;padding:8px 16px;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;">&#9999; Edit Entry</button>' +
+      (isOwner ? '<button onclick="editPersonEntry(&quot;' + p._timestamp + '&quot;)" style="background:var(--ppl);color:#fff;border:none;border-radius:8px;padding:8px 16px;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;">&#9999; Edit Entry</button>' : '') +
       (isOwner ? '<button onclick="deletePersonEntry(&quot;' + p._timestamp + '&quot;)" style="background:#c44;color:#fff;border:none;border-radius:8px;padding:8px 16px;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;">&#128465; Delete</button>' : '') +
+      (!isOwner ? '<span style="font-size:11px;color:var(--light);font-style:italic;padding:8px 0;"><a href="#" onclick="openUserAuth();return false;" style="color:var(--eve);">Sign in</a> to edit or delete this entry</span>' : '') +
       '</div>';
   var recBtn = '<div style="margin-top:10px;"><button onclick="prefillRec(&quot;' + (p.name||'').replace(/"/g,'&quot;') + '&quot;)" style="background:var(--ppl);color:#fff;border:none;border-radius:8px;padding:8px 16px;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;">&#128156; Recommend This Person</button></div>';
 
@@ -6710,6 +6807,26 @@ document.addEventListener('DOMContentLoaded', function() {
   setTimeout(applyInnerOrder, 250);
 });
 
+// ── PREFERRED CONTACT STAR ───────────────────────────────────────────────────
+function initPrefContactStars() {
+  document.querySelectorAll('input[name="pref_contact"]').forEach(function(radio) {
+    radio.addEventListener('change', function() {
+      // Reset all stars
+      document.querySelectorAll('input[name="pref_contact"]').forEach(function(r) {
+        var star = r.nextElementSibling && r.nextElementSibling.querySelector('.pref-star');
+        if(star) star.style.color = '#ccc';
+      });
+      // Light up selected star
+      var star = this.nextElementSibling && this.nextElementSibling.querySelector('.pref-star');
+      if(star) star.style.color = '#f5a623';
+    });
+  });
+}
+document.addEventListener('DOMContentLoaded', function() {
+  setTimeout(initPrefContactStars, 300);
+  updateUserBtn();
+});
+
 // ── SOCIAL SECTION: sort filled first, hide empty, inline edit ───────────────
 
 // Sort social fields — filled ones float to top, empty stay in order below
@@ -6759,12 +6876,7 @@ document.addEventListener('DOMContentLoaded', function() {
   setTimeout(function() {
     var grid = document.querySelector('#vs-ppl-social .g3');
     if(!grid) return;
-    grid.querySelectorAll('input').forEach(function(inp) {
-      inp.addEventListener('input', function() { sortSocialFields(); });
-      inp.addEventListener('focus', function() { this.closest('.f').style.display = ''; });
-      inp.addEventListener('blur',  function() { applyEmptySocialVisibility(); });
-    });
-    applyEmptySocialVisibility();
+    // All social fields always visible — no hiding
   }, 400);
 });
 
@@ -6789,6 +6901,193 @@ function makeFieldEditable(el, onSave) {
   input.addEventListener('blur', save);
   input.addEventListener('keydown', function(e) { if(e.key==='Enter') { e.preventDefault(); save(); } if(e.key==='Escape') { el.textContent=original; el.dataset.editing='0'; } });
 }
+
+// ── USER AUTH SYSTEM ──────────────────────────────────────────────────────────
+const USERS_KEY   = 'rg_users';      // {email: {name, pinHash, created}}
+const SESSION_KEY = 'rg_session';    // {email, name, token}
+
+function simpleHash(str) {
+  var h = 0;
+  for(var i=0; i<str.length; i++) { h = ((h<<5)-h)+str.charCodeAt(i); h|=0; }
+  return String(Math.abs(h));
+}
+
+function getCurrentUser() {
+  try { return JSON.parse(localStorage.getItem(SESSION_KEY)||'null'); } catch(e) { return null; }
+}
+
+function getUsers() {
+  try { return JSON.parse(localStorage.getItem(USERS_KEY)||'{}'); } catch(e) { return {}; }
+}
+
+function openUserAuth() {
+  var user = getCurrentUser();
+  if(user) { openMyProfile(); return; }
+  openMo('moUserAuth');
+}
+
+function switchAuthTab(tab) {
+  var isSignin = tab === 'signin';
+  document.getElementById('authPanelSignin').style.display = isSignin ? '' : 'none';
+  document.getElementById('authPanelCreate').style.display = isSignin ? 'none' : '';
+  document.getElementById('authTabSignIn').style.background = isSignin ? 'var(--eve-l)' : 'var(--warm)';
+  document.getElementById('authTabSignIn').style.color = isSignin ? 'var(--eve)' : 'var(--mid)';
+  document.getElementById('authTabCreate').style.background = isSignin ? 'var(--warm)' : 'var(--eve-l)';
+  document.getElementById('authTabCreate').style.color = isSignin ? 'var(--mid)' : 'var(--eve)';
+  document.getElementById('siError').textContent = '';
+  document.getElementById('caError').textContent = '';
+}
+
+function signIn() {
+  var email = (document.getElementById('siEmail').value||'').trim().toLowerCase();
+  var pin   = (document.getElementById('siPin').value||'').trim();
+  var err   = document.getElementById('siError');
+  if(!email || !pin) { err.textContent = 'Please enter your email and PIN.'; return; }
+  var users = getUsers();
+  var user  = users[email];
+  if(!user) { err.textContent = 'No account found for that email.'; return; }
+  if(user.pinHash !== simpleHash(pin)) { err.textContent = 'Incorrect PIN. Try again.'; return; }
+  var session = { email: email, name: user.name, token: user.token };
+  localStorage.setItem(SESSION_KEY, JSON.stringify(session));
+  closeMo('moUserAuth');
+  updateUserBtn();
+  toast('✦ Welcome back, ' + user.name + '!', 'ok');
+}
+
+function createAccount() {
+  var name  = (document.getElementById('caName').value||'').trim();
+  var email = (document.getElementById('caEmail').value||'').trim().toLowerCase();
+  var pin   = (document.getElementById('caPin').value||'').trim();
+  var conf  = (document.getElementById('caPinConfirm').value||'').trim();
+  var err   = document.getElementById('caError');
+  if(!name)  { err.textContent = 'Please enter your name.'; return; }
+  if(!email || !email.includes('@')) { err.textContent = 'Please enter a valid email.'; return; }
+  if(pin.length < 4) { err.textContent = 'PIN must be at least 4 digits.'; return; }
+  if(pin !== conf)   { err.textContent = 'PINs do not match.'; return; }
+  var users = getUsers();
+  if(users[email])   { err.textContent = 'An account already exists for that email. Sign in instead.'; return; }
+  var token = generateToken();
+  users[email] = { name: name, pinHash: simpleHash(pin), token: token, created: new Date().toISOString() };
+  localStorage.setItem(USERS_KEY, JSON.stringify(users));
+  var session = { email: email, name: name, token: token };
+  localStorage.setItem(SESSION_KEY, JSON.stringify(session));
+  closeMo('moUserAuth');
+  updateUserBtn();
+  toast('✦ Account created! Welcome, ' + name + '!', 'ok');
+}
+
+function signOut() {
+  localStorage.removeItem(SESSION_KEY);
+  closeMo('moMyProfile');
+  updateUserBtn();
+  toast('Signed out.', 'ok');
+}
+
+function updateUserBtn() {
+  var user  = getCurrentUser();
+  var btn   = document.getElementById('userSignInBtn');
+  var icon  = document.getElementById('userSignInIcon');
+  var label = document.getElementById('userSignInLabel');
+  if(!btn) return;
+  if(user) {
+    icon.textContent  = '✦';
+    label.textContent = user.name.split(' ')[0];
+    btn.style.background   = 'var(--eve-l)';
+    btn.style.borderColor  = 'var(--eve)';
+    btn.style.color        = 'var(--eve)';
+  } else {
+    icon.textContent  = '👤';
+    label.textContent = 'Sign In';
+    btn.style.background   = 'var(--purple-l)';
+    btn.style.borderColor  = 'var(--eve)';
+    btn.style.color        = 'var(--eve)';
+  }
+}
+
+function openMyProfile() {
+  var user = getCurrentUser();
+  if(!user) { openMo('moUserAuth'); return; }
+  var content = document.getElementById('myProfileContent');
+  content.innerHTML =
+    '<div><strong>Name:</strong> ' + user.name + '</div>' +
+    '<div><strong>Email:</strong> ' + user.email + '</div>';
+  var all = JSON.parse(localStorage.getItem(RECORDS_KEY)||'[]');
+  var mine = all.filter(function(r){ return r._user_email === user.email; });
+  var list = document.getElementById('myEntriesList');
+  if(!mine.length) {
+    list.innerHTML = '<div style="font-size:12px;color:var(--light);padding:8px 0;">No entries yet.</div>';
+  } else {
+    list.innerHTML = mine.map(function(r, i) {
+      var idx = all.indexOf(r);
+      var title = r.name || r.event_name || r.org_name || r.modality_name || r.store_name || r.title || 'Untitled';
+      var sec   = r._section || 'entry';
+      return '<div style="display:flex;align-items:center;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border);font-size:12px;">' +
+        '<span><strong>' + title + '</strong> <span style="color:var(--light);">(' + sec + ')</span></span>' +
+        '<span style="display:flex;gap:4px;">' +
+          '<button onclick="userEditEntry(' + idx + ');closeMo(\'moMyProfile\');" style="font-size:10px;padding:3px 8px;background:var(--eve-l);color:var(--eve);border:1px solid var(--eve);border-radius:6px;cursor:pointer;font-family:inherit;">Edit</button>' +
+          '<button onclick="userDeleteEntry(' + idx + ');openMyProfile();" style="font-size:10px;padding:3px 8px;background:#fce8e8;color:#c0392b;border:1px solid #c0392b;border-radius:6px;cursor:pointer;font-family:inherit;">Delete</button>' +
+        '</span></div>';
+    }).join('');
+  }
+  openMo('moMyProfile');
+}
+
+function userEditEntry(idx) {
+  var user = getCurrentUser();
+  var all  = JSON.parse(localStorage.getItem(RECORDS_KEY)||'[]');
+  var entry = all[idx];
+  if(!entry) { toast('Entry not found.', 'er'); return; }
+  if(!adminUnlocked && entry._user_email !== (user && user.email)) {
+    toast('You can only edit your own entries.', 'er'); return;
+  }
+  var sec = entry._section || 'people';
+  go(sec);
+  setTimeout(function(){ loadRecordIntoForm(idx); }, 300);
+}
+
+function userDeleteEntry(idx) {
+  var user = getCurrentUser();
+  var all  = JSON.parse(localStorage.getItem(RECORDS_KEY)||'[]');
+  var entry = all[idx];
+  if(!entry) { toast('Entry not found.', 'er'); return; }
+  if(!adminUnlocked && entry._user_email !== (user && user.email)) {
+    toast('You can only delete your own entries.', 'er'); return;
+  }
+  if(!confirm('Delete "' + (entry.name||entry.title||'this entry') + '"? This cannot be undone.')) return;
+  all.splice(idx, 1);
+  localStorage.setItem(RECORDS_KEY, JSON.stringify(all));
+  renderRecords(); renderCRM(); renderTallyStrip();
+  toast('Entry deleted.', 'ok');
+}
+
+// ── IMAGE ZOOM ─────────────────────────────────────────────────────────────────
+function openImgZoom(src) {
+  var overlay = document.getElementById('imgZoomOverlay');
+  var img     = document.getElementById('imgZoomTarget');
+  if(!overlay || !img || !src) return;
+  img.src = src;
+  overlay.classList.add('on');
+  document.body.style.overflow = 'hidden';
+}
+function closeImgZoom() {
+  var overlay = document.getElementById('imgZoomOverlay');
+  if(overlay) overlay.classList.remove('on');
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeImgZoom(); });
+
+// Make any img with class img-zoomable or inside .sg-photo-frame/.sg-logo-frame clickable
+document.addEventListener('DOMContentLoaded', function() {
+  setTimeout(function() {
+    // Wire photo preview
+    document.addEventListener('click', function(e) {
+      var img = e.target.closest('img.img-zoomable') || (e.target.tagName === 'IMG' && e.target.closest('.sg-photo-frame, .sg-logo-frame') ? e.target : null);
+      if(img && img.src && !img.src.endsWith('#') && img.src !== window.location.href) {
+        openImgZoom(img.src);
+      }
+    });
+  }, 200);
+});
 
 // ── GUIDE MANDALA PREVIEW ──
 (function(){
