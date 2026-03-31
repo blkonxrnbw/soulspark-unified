@@ -86,6 +86,12 @@ html{scroll-behavior:smooth}
 [data-theme="dark"] .hb{background:#2a2018!important;}
 [data-theme="dark"] .rg-hero{background:linear-gradient(135deg,#1e1814,#2a2018);}
 .voice-btn{padding:4px 10px;font-size:11px;font-weight:600;border:1.5px solid var(--border);border-radius:8px;background:var(--warm);color:var(--mid);cursor:pointer;font-family:'Jost',sans-serif;white-space:nowrap;transition:all .15s;}
+.draft-banner{display:flex;align-items:center;justify-content:space-between;
+  background:var(--purple-l);border:1px solid var(--eve);border-radius:10px;
+  padding:8px 14px;margin-bottom:12px;font-size:12px;color:var(--eve);}
+.draft-banner button{font-size:10px;background:none;border:1px solid var(--eve);
+  border-radius:6px;padding:2px 8px;cursor:pointer;color:var(--eve);font-family:inherit;}
+
 .voice-btn:hover{border-color:var(--eve);color:var(--eve);}
 .voice-btn.recording{background:#fce8e8;border-color:#c0392b;color:#c0392b;animation:pulse 1s infinite;}
 @keyframes pulse{0%,100%{opacity:1;}50%{opacity:.6;}}
@@ -386,7 +392,7 @@ body::before{
 
 /* PAGES */
 .pages{flex:1}
-.page{display:none;padding:32px 36px 80px;max-width:940px;position:relative;overflow:hidden;background:transparent}
+.page{display:none;padding:32px 36px 80px;max-width:940px;position:relative;background:transparent}
 .page.on{display:block}
 
 /* HOME */
@@ -878,7 +884,7 @@ textarea{resize:vertical;line-height:1.6;min-height:72px}
 <button class="rg-icon-btn" onclick="go('networking')" style="background:linear-gradient(135deg,#2d7a3a,#5aad68)" title="Networking">🤝</button>
 <button class="rg-icon-btn" onclick="go('vendors')" style="background:linear-gradient(135deg,#8b1a1a,#c0392b)" title="Vendors">🏪</button>
 <button class="rg-icon-btn" onclick="go('people')" style="background:linear-gradient(135deg,#c47a1a,#f0a030)" title="People">👥</button>
-<button class="rg-icon-btn" onclick="go('events')" style="background:linear-gradient(135deg,#1a6670,#2d98a8)" title="Events &amp; Vendor Log">🎪</button>
+<button class="rg-icon-btn" onclick="go('events')" style="background:linear-gradient(135deg,#1a6670,#2d98a8)" title="Upcoming Events &amp; Vendor Log">🎪</button>
 <button class="rg-icon-btn" onclick="go('links')" style="background:linear-gradient(135deg,#9a8060,#c4a878)" title="Links">🔗</button>
 <button class="rg-icon-btn" onclick="go('modalities')" style="background:linear-gradient(135deg,#6030a8,#9060d0)" title="Modalities">🔮</button>
 <button class="rg-icon-btn" onclick="go('misc')" style="background:linear-gradient(135deg,#7a1010,#b02020)" title="Vault">📚</button>
@@ -2034,11 +2040,15 @@ textarea{resize:vertical;line-height:1.6;min-height:72px}
             <label class="cp"><input type="checkbox" name="type_other"><span>➕ Other</span></label>
           </div></div>
           <div class="f" id="store-other-wrapper" style="display:none;"><label>Other Store Type (specify)</label><input type="text" name="type_other_text" placeholder="Describe the store type..."></div>
-          <div class="f" style="margin-top:6px;"><label>Vendor Opportunity</label><div class="cg">
+          <div class="f" style="margin-top:6px;"><label>Events, Retail &amp; Wholesale Opportunities</label><div class="cg">
             <label class="cp"><input type="checkbox" name="opp_consignment"><span>📋 Consignment</span></label>
             <label class="cp"><input type="checkbox" name="opp_wholesale"><span>📦 Wholesale</span></label>
-            <label class="cp"><input type="checkbox" name="opp_popup"><span>🎪 Pop-Up Events</span></label>
+            <label class="cp"><input type="checkbox" name="opp_popup"><span>🏪 Pop-Up</span></label>
             <label class="cp"><input type="checkbox" name="opp_permanent"><span>🏠 Permanent Vendor</span></label>
+            <label class="cp"><input type="checkbox" name="opp_festival"><span>🎉 Festival</span></label>
+            <label class="cp"><input type="checkbox" name="opp_market"><span>🛒 Market</span></label>
+            <label class="cp"><input type="checkbox" name="opp_expo"><span>🎡 Expo</span></label>
+            <label class="cp"><input type="checkbox" name="opp_retail"><span>🏬 Retail Shelf</span></label>
           </div></div>
           <div class="f"><label>Additional Type Notes</label><input type="text" name="type_notes" placeholder="Describe further..."></div>
           <div class="g2">
@@ -2051,7 +2061,7 @@ textarea{resize:vertical;line-height:1.6;min-height:72px}
           </div>
         </div>
         <div class="card">
-          <div class="ct"><div class="ct-dot" style="background:var(--store)"></div>Submission & Follow-Up
+          <div class="ct"><div class="ct-dot" style="background:var(--store)"></div>Events, Retail &amp; Wholesale Opportunities</div>
           <div class="g2">
             <div class="f"><label>Submission Requirements</label><textarea name="submission_req" rows="3" placeholder="Enter notes..."></textarea></div>
             <div class="f"><label>Additional Information</label><textarea name="additional_info" rows="3" placeholder="Enter notes..."></textarea></div>
@@ -2370,8 +2380,8 @@ textarea{resize:vertical;line-height:1.6;min-height:72px}
     <div class="page" id="page-events">
       <div class="ph">
         <div class="ph-icon" style="background:linear-gradient(135deg,#1f6670,#6b2fa0);">📅</div>
-        <h1>Events &amp; Vendor Opportunities</h1>
-        <div class="sub" style="color:var(--eve)">Upcoming Calendar · Vendor Log · Shows · Expos · Retreats · Pop-Ups</div>
+        <h1>Upcoming Events &amp; Vendor Log</h1>
+        <div class="sub" style="color:var(--eve)">Upcoming Calendar · Vendor Log · Markets · Festivals · Retreats · Pop-Ups</div>
         <p class="desc">Browse upcoming events on the calendar, and use the Vendor Log to record your booth details, fees, and results from every show you attend.</p>
       </div>
 
@@ -3124,7 +3134,7 @@ textarea{resize:vertical;line-height:1.6;min-height:72px}
   <button class="tab on" data-p="home" onclick="go('home')">Home</button>
   <button class="tab" data-p="guide" onclick="go('guide')">Guide</button>
   <button class="tab" data-p="networking" onclick="go('networking')">Networking</button>
-  <button class="tab" data-p="events" onclick="go('events')">📅 Events</button>
+  <button class="tab" data-p="events" onclick="go('events')">📅 Upcoming</button>
   <button class="tab" data-p="mandala" onclick="go('mandala')">🔮 Mandala</button>
   <button class="tab" data-p="people" onclick="go('people')">People</button>
   <button class="tab" data-p="links" onclick="go('links')">Links</button>
@@ -3147,7 +3157,7 @@ textarea{resize:vertical;line-height:1.6;min-height:72px}
 <div class="mobile-tab-bar" id="mobileTabBar">
   <button class="mobile-tab-btn" onclick="go('home')" id="mtb-home"><span class="m-icon">🏠</span>Home</button>
   <button class="mobile-tab-btn" onclick="go('people')" id="mtb-people"><span class="m-icon">👥</span>People</button>
-  <button class="mobile-tab-btn" onclick="go('events')" id="mtb-shows"><span class="m-icon">🎪</span>Events</button>
+  <button class="mobile-tab-btn" onclick="go('events')" id="mtb-shows"><span class="m-icon">📅</span>Upcoming</button>
   <button class="mobile-tab-btn" onclick="go('ideas')" id="mtb-ideas"><span class="m-icon">💡</span>Ideas</button>
   <button class="mobile-tab-btn" onclick="openQuickAdd()" id="mtb-add" style="color:var(--eve);"><span class="m-icon">✦</span>Add</button>
 </div>
@@ -3215,6 +3225,13 @@ textarea{resize:vertical;line-height:1.6;min-height:72px}
         <label>PIN (4–8 digits)</label>
         <input type="password" id="siPin" placeholder="••••" maxlength="8" inputmode="numeric" style="width:100%;box-sizing:border-box;" onkeydown="if(event.key==='Enter')signIn()">
       </div>
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
+        <label style="display:flex;align-items:center;gap:6px;font-size:12px;color:var(--mid);cursor:pointer;">
+          <input type="checkbox" id="rememberMe" style="accent-color:var(--eve);width:14px;height:14px;">
+          Remember me on this device
+        </label>
+        <button type="button" onclick="togglePinVisibility()" style="font-size:10px;color:var(--eve);background:none;border:none;cursor:pointer;font-family:inherit;">Show PIN</button>
+      </div>
       <div id="siError" style="font-size:12px;color:#c0392b;margin-bottom:10px;min-height:16px;"></div>
       <button onclick="signIn()" class="mo-btn primary" style="width:100%;font-size:14px;padding:12px;">Sign In ✦</button>
     </div>
@@ -3249,9 +3266,11 @@ textarea{resize:vertical;line-height:1.6;min-height:72px}
     <button class="mo-close" onclick="closeMo('moMyProfile')">✕</button>
     <h2>👤 My Account</h2>
     <div id="myProfileContent" style="font-size:13px;color:var(--mid);line-height:2;"></div>
-    <div style="display:flex;gap:10px;margin-top:18px;">
+    <div id="myProfileMeta" style="font-size:11px;color:var(--light);margin-top:6px;line-height:1.8;"></div>
+    <div style="display:flex;gap:10px;margin-top:14px;">
       <button onclick="go('people');closeMo('moMyProfile');" class="mo-btn primary" style="flex:1;">➕ Add My Profile</button>
-      <button onclick="signOut()" class="mo-btn" style="flex:1;background:#fce8e8;color:#c0392b;border-color:#c0392b;">Sign Out</button>
+      <button onclick="clearMyDrafts()" class="mo-btn" style="flex:1;background:var(--warm);border-color:var(--border);color:var(--mid);">🗑 Clear Drafts</button>
+      <button onclick="signOut()" class="mo-btn" style="background:#fce8e8;color:#c0392b;border-color:#c0392b;padding:8px 14px;">Sign Out</button>
     </div>
     <div style="margin-top:14px;">
       <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--light);margin-bottom:8px;">My Entries</div>
@@ -3664,6 +3683,7 @@ function go(p) {
     p = 'events';
     setTimeout(function(){ switchEvInnerTab('vendor'); }, 50);
   }
+  saveLastPage(p);
   updateMobileTabBar(p);
   document.querySelectorAll('.tab').forEach(function(t) { t.classList.toggle('on', t.dataset.p===p); });
   document.querySelectorAll('.page').forEach(function(x) { x.classList.toggle('on', x.id==='page-'+p); });
@@ -3674,6 +3694,18 @@ function go(p) {
   if(p==='people') { setTimeout(refreshModalitySuggestions, 80); }
   setTimeout(applyVis, 20);
   window.scrollTo({top:0,behavior:'smooth'});
+  // Show draft restore banner if signed in and draft exists
+  var _goUser = getCurrentUser();
+  if(_goUser && typeof loadDraft === 'function') {
+    var _pageName = p;
+    setTimeout(function(){
+      var draft = loadDraft(_pageName);
+      if(draft && Object.keys(draft).filter(function(k){return k!=='_savedAt';}).length > 0) {
+        var when = draft._savedAt ? new Date(draft._savedAt).toLocaleString('en-US',{month:'short',day:'numeric',hour:'numeric',minute:'2-digit'}) : '';
+        showDraftBanner(_pageName, when);
+      }
+    }, 200);
+  }
 }
 
 function openMo(id) { var m=document.getElementById(id); if(m) m.classList.add('on'); }
@@ -4098,7 +4130,7 @@ function renderRecords(filter) {
   document.getElementById('recordFilters').innerHTML =
     '<span style="font-size:11px;color:var(--mid);margin-right:4px">Filter:</span>' +
     ['All'].concat(sections).map(function(s) {
-      return '<button onclick="renderRecords(\'' + s + '\') style="font-size:10px;padding:4px 10px;border-radius:6px;border:1px solid var(--border);background:' + (filter===s?'var(--cur)':'var(--bg)') + ';color:' + (filter===s?'#fff':'var(--mid)') + ';cursor:pointer;font-family:Jost,sans-serif">' + s + '</button>';
+      return '<button onclick="renderRecords(\'' + s + '\')" style="font-size:10px;padding:4px 10px;border-radius:6px;border:1px solid var(--border);background:' + (filter===s?'var(--cur)':'var(--bg)') + ';color:' + (filter===s?'#fff':'var(--mid)') + ';cursor:pointer;font-family:Jost,sans-serif">' + s + '</button>';
     }).join('');
   var filtered = filter&&filter!=='All' ? all.filter(function(r){return r._section===filter;}) : all;
   var container=document.getElementById('recordsContainer');
@@ -4213,7 +4245,7 @@ async function send(e, section, form) {
     if(ok) toast('✅ Saved to Google Sheets!','ok');
     else if(url) toast('⚠ Sheets unreachable — saved locally.','er');
     else toast('💾 Saved locally. Connect Sheets to sync.','');
-    form.reset(); resetStars(); resetTagBuilders(); resetPV(); if(section==='shows') clearShowFlyer(); ['networking','modalities','stores','links','ideas','misc'].forEach(function(s){var p={networking:'netImg',modalities:'modImg',stores:'storeLogo',links:'linkThumb',ideas:'ideaImg',misc:'vaultImg'}[s];if(document.getElementById(p+'B64'))clearSectionUpload(p);}); modalityLinkedTags=[]; renderModalityTags(); refreshModalitySuggestions(); renderTally(); renderCRM(); renderTallyStrip(); renderHomeTagCloud(); if(typeof buildMandala==='function') buildMandala(); if(vaultCatOpen) renderVaultByCategory();
+    clearDraft(section); form.reset(); resetStars(); resetTagBuilders(); resetPV(); if(section==='shows') clearShowFlyer(); ['networking','modalities','stores','links','ideas','misc'].forEach(function(s){var p={networking:'netImg',modalities:'modImg',stores:'storeLogo',links:'linkThumb',ideas:'ideaImg',misc:'vaultImg'}[s];if(document.getElementById(p+'B64'))clearSectionUpload(p);}); modalityLinkedTags=[]; renderModalityTags(); refreshModalitySuggestions(); renderTally(); renderCRM(); renderTallyStrip(); renderHomeTagCloud(); if(typeof buildMandala==='function') buildMandala(); if(vaultCatOpen) renderVaultByCategory();
     resetPhoto('photoLabel','photoIcon','👤','photoB64','photoMime'); resetPhoto('logoLabel','logoIcon','🏢','logoB64','logoMime');
     ['show-other-wrapper','modality-other-wrapper','store-other-wrapper','idea-other-wrapper'].forEach(function(id) {
       var el=document.getElementById(id); if(el) el.style.display='none';
@@ -7123,8 +7155,12 @@ function initPrefContactStars() {
 document.addEventListener('DOMContentLoaded', function() {
   setTimeout(initPrefContactStars, 300);
   updateUserBtn();
+  renderCRM(); renderTally(); renderTallyStrip();
   renderFollowUpReminders(); renderRevenueSummary();
   renderHomeTagCloud();
+  prefillSavedCredentials();
+  restoreLastPage();
+  setTimeout(initFormDraftSaving, 500);
 });
 
 // ── SOCIAL SECTION: sort filled first, hide empty, inline edit ───────────────
@@ -7472,6 +7508,209 @@ function updateMobileTabBar(sec) {
   if(btn) btn.classList.add('active');
 }
 
+
+// ── REMEMBER ME / SAVED CREDENTIALS ──────────────────────────────────────────
+const SAVED_CREDS_KEY = 'rg_saved_creds';  // {email, pinHash, rememberMe}
+const LAST_PAGE_KEY   = 'rg_last_page';
+const DRAFTS_KEY      = 'rg_drafts';       // {userEmail: {section: {field: value}}}
+
+function prefillSavedCredentials() {
+  var saved = null;
+  try { saved = JSON.parse(localStorage.getItem(SAVED_CREDS_KEY)||'null'); } catch(e){}
+  if(!saved) return;
+  var emailEl = document.getElementById('siEmail');
+  var cbEl    = document.getElementById('rememberMe');
+  if(emailEl && saved.email) emailEl.value = saved.email;
+  if(cbEl) cbEl.checked = true;
+  // If pin is saved, pre-fill and focus submit button
+  if(saved.pinSaved) {
+    var pinEl = document.getElementById('siPin');
+    if(pinEl) {
+      pinEl.setAttribute('data-saved-hash', saved.pinHash||'');
+      pinEl.placeholder = '●●●● (saved)';
+    }
+  }
+}
+
+function togglePinVisibility() {
+  var pin = document.getElementById('siPin');
+  var btn = event.target;
+  if(!pin) return;
+  if(pin.type === 'password') {
+    pin.type = 'text';
+    btn.textContent = 'Hide PIN';
+  } else {
+    pin.type = 'password';
+    btn.textContent = 'Show PIN';
+  }
+}
+
+// ── LAST PAGE MEMORY ─────────────────────────────────────────────────────────
+function saveLastPage(page) {
+  var user = getCurrentUser();
+  var key  = user ? (LAST_PAGE_KEY + '_' + user.email) : LAST_PAGE_KEY;
+  localStorage.setItem(key, page);
+}
+
+function restoreLastPage() {
+  var user   = getCurrentUser();
+  var key    = user ? (LAST_PAGE_KEY + '_' + user.email) : LAST_PAGE_KEY;
+  var lastPg = localStorage.getItem(key);
+  // Map old page names to new ones
+  if(lastPg === 'shows' || lastPg === 'expos') lastPg = 'events';
+  if(lastPg && lastPg !== 'home') {
+    var target = document.getElementById('page-' + lastPg);
+    if(target) { go(lastPg); return; }
+  }
+  // Default: show home and render it
+  go('home');
+}
+
+// ── FORM DRAFT AUTO-SAVE ──────────────────────────────────────────────────────
+function getDrafts() {
+  try { return JSON.parse(localStorage.getItem(DRAFTS_KEY)||'{}'); } catch(e) { return {}; }
+}
+function saveDrafts(d) {
+  localStorage.setItem(DRAFTS_KEY, JSON.stringify(d));
+}
+
+function getDraftKey() {
+  var user = getCurrentUser();
+  return user ? user.email : '__anon__';
+}
+
+function saveDraft(section, data) {
+  var drafts = getDrafts();
+  var key    = getDraftKey();
+  if(!drafts[key]) drafts[key] = {};
+  drafts[key][section] = Object.assign(drafts[key][section]||{}, data);
+  drafts[key][section]._savedAt = new Date().toISOString();
+  saveDrafts(drafts);
+}
+
+function loadDraft(section) {
+  var drafts = getDrafts();
+  var key    = getDraftKey();
+  return (drafts[key] && drafts[key][section]) ? drafts[key][section] : null;
+}
+
+function clearDraft(section) {
+  var drafts = getDrafts();
+  var key    = getDraftKey();
+  if(drafts[key]) { delete drafts[key][section]; saveDrafts(drafts); }
+}
+
+function clearMyDrafts() {
+  var drafts = getDrafts();
+  var key    = getDraftKey();
+  delete drafts[key];
+  saveDrafts(drafts);
+  toast('✓ Drafts cleared.', 'ok');
+  openMyProfile(); // refresh
+}
+
+function initFormDraftSaving() {
+  // Auto-save any form field changes as drafts (debounced 2s)
+  var saveTimer = {};
+  document.querySelectorAll('.page form input, .page form textarea, .page form select').forEach(function(el) {
+    if(!el.name || el.name.includes('b64') || el.name.includes('mime') || el.type === 'file') return;
+    var page = el.closest('.page');
+    if(!page) return;
+    var section = page.id.replace('page-','');
+    el.addEventListener('input', function() {
+      clearTimeout(saveTimer[section]);
+      saveTimer[section] = setTimeout(function() {
+        var form = page.querySelector('form');
+        if(!form) return;
+        var data = {};
+        form.querySelectorAll('input[name], textarea[name], select[name]').forEach(function(f) {
+          if(!f.name || f.name.includes('b64') || f.name.includes('mime') || f.type === 'file') return;
+          if(f.type === 'checkbox' || f.type === 'radio') {
+            if(f.checked) data[f.name] = f.value || true;
+          } else if(f.value && f.value.trim()) {
+            data[f.name] = f.value;
+          }
+        });
+        if(Object.keys(data).length > 0) {
+          saveDraft(section, data);
+          showDraftBadge(section);
+        }
+      }, 2000);
+    });
+    el.addEventListener('change', function() { el.dispatchEvent(new Event('input')); });
+  });
+  // Restore any saved drafts
+  restoreAllDrafts();
+}
+
+function restoreAllDrafts() {
+  var user = getCurrentUser();
+  if(!user) return; // only restore drafts for signed-in users
+  var drafts = getDrafts();
+  var key = getDraftKey();
+  var myDrafts = drafts[key] || {};
+  Object.entries(myDrafts).forEach(function(pair) {
+    var section = pair[0], data = pair[1];
+    restoreDraftToForm(section, data);
+  });
+}
+
+function restoreDraftToForm(section, data) {
+  var page = document.getElementById('page-'+section);
+  if(!page) return;
+  var form = page.querySelector('form');
+  if(!form) return;
+  Object.entries(data).forEach(function(pair) {
+    var name = pair[0], val = pair[1];
+    if(name === '_savedAt') return;
+    var els = form.querySelectorAll('[name="'+name+'"]');
+    els.forEach(function(el) {
+      if(el.type === 'checkbox') { if(val === true || val === name || val === 'true') el.checked = true; }
+      else if(el.type === 'radio') { if(el.value === val) el.checked = true; }
+      else { el.value = val; }
+    });
+  });
+  showDraftBadge(section);
+}
+
+
+function showDraftBanner(section, when) {
+  var page = document.getElementById('page-' + section);
+  if(!page) return;
+  if(page.querySelector('.draft-banner')) return;
+  var viewBtn = page.querySelector('.view-entries-btn');
+  if(!viewBtn) return;
+  var banner = document.createElement('div');
+  banner.className = 'draft-banner';
+  var restoreBtn = document.createElement('button');
+  restoreBtn.textContent = 'Restore';
+  restoreBtn.onclick = function(){ var d=loadDraft(section); if(d) restoreDraftToForm(section,d); banner.remove(); };
+  var discardBtn = document.createElement('button');
+  discardBtn.textContent = 'Discard';
+  discardBtn.onclick = function(){ clearDraft(section); banner.remove(); };
+  var msgSpan = document.createElement('span');
+  msgSpan.textContent = '\u270f Draft saved' + (when ? ' \u00b7 ' + when : '');
+  var btnSpan = document.createElement('span');
+  btnSpan.style.cssText = 'display:flex;gap:6px;';
+  btnSpan.appendChild(restoreBtn);
+  btnSpan.appendChild(discardBtn);
+  banner.appendChild(msgSpan);
+  banner.appendChild(btnSpan);
+  viewBtn.parentNode.insertBefore(banner, viewBtn.nextSibling);
+}
+
+function showDraftBadge(section) {
+  var btn = document.querySelector('[onclick*="viewSectionEntries(\'"+section+"\')"]');
+  if(!btn) return;
+  if(!btn.querySelector('.draft-badge')) {
+    var badge = document.createElement('span');
+    badge.className = 'draft-badge';
+    badge.textContent = ' ✏ Draft saved';
+    badge.style.cssText = 'font-size:9px;opacity:.7;font-weight:400;';
+    btn.appendChild(badge);
+  }
+}
+
 // ── USER AUTH SYSTEM ──────────────────────────────────────────────────────────
 
 const USERS_KEY   = 'rg_users';      // {email: {name, pinHash, created}}
@@ -7510,19 +7749,28 @@ function switchAuthTab(tab) {
 }
 
 function signIn() {
-  var email = (document.getElementById('siEmail').value||'').trim().toLowerCase();
-  var pin   = (document.getElementById('siPin').value||'').trim();
-  var err   = document.getElementById('siError');
+  var email    = (document.getElementById('siEmail').value||'').trim().toLowerCase();
+  var pinEl    = document.getElementById('siPin');
+  var pin      = (pinEl ? pinEl.value||'' : '').trim();
+  var remember = document.getElementById('rememberMe') && document.getElementById('rememberMe').checked;
+  var err      = document.getElementById('siError');
   if(!email || !pin) { err.textContent = 'Please enter your email and PIN.'; return; }
   var users = getUsers();
   var user  = users[email];
   if(!user) { err.textContent = 'No account found for that email.'; return; }
   if(user.pinHash !== simpleHash(pin)) { err.textContent = 'Incorrect PIN. Try again.'; return; }
+  if(remember) {
+    localStorage.setItem(SAVED_CREDS_KEY, JSON.stringify({email:email, pinHash:user.pinHash, pinSaved:true, rememberMe:true}));
+  } else {
+    localStorage.removeItem(SAVED_CREDS_KEY);
+  }
   var session = { email: email, name: user.name, token: user.token };
   localStorage.setItem(SESSION_KEY, JSON.stringify(session));
   closeMo('moUserAuth');
   updateUserBtn();
   toast('✦ Welcome back, ' + user.name + '!', 'ok');
+  restoreLastPage();
+  setTimeout(restoreAllDrafts, 400);
 }
 
 function createAccount() {
@@ -7601,6 +7849,24 @@ function openMyProfile() {
     }).join('');
   }
   openMo('moMyProfile');
+  // Show meta
+  var _mpUser = getCurrentUser();
+  if(_mpUser) {
+    var meta = document.getElementById('myProfileMeta');
+    if(meta) {
+      var _key = LAST_PAGE_KEY + '_' + _mpUser.email;
+      var _lastPg = localStorage.getItem(_key) || '—';
+      var _drafts = getDrafts();
+      var _myDrafts = _drafts[_mpUser.email] || {};
+      var _draftSecs = Object.keys(_myDrafts).filter(function(s){ return s !== '_savedAt'; });
+      var _creds = null;
+      try { _creds = JSON.parse(localStorage.getItem(SAVED_CREDS_KEY)||'null'); } catch(e){}
+      meta.innerHTML =
+        '<div>Last visited: <strong>' + _lastPg + '</strong></div>' +
+        (_draftSecs.length ? '<div>Unsaved drafts: <strong>' + _draftSecs.join(', ') + '</strong></div>' : '') +
+        '<div>Remember me: <strong>' + (_creds && _creds.rememberMe ? '✓ On' : 'Off') + '</strong></div>';
+    }
+  }
 }
 
 function userEditEntry(idx) {
