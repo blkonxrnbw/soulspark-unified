@@ -10,6 +10,7 @@
   --bg:#f0eee1; --warm:#faf8f3; --border:#d6cfc0;
   --text:#1e1a14; --mid:#6b6258; --light:#a09688;
   --card:#faf8f2; --shadow:rgba(40,30,10,.08);
+  --ink:#1e1a14;
   --net:#2d5a27; --net-l:#e8f0e6;
   --ppl:#c47a1a; --ppl-l:#fdf0dc;
   --show:#1f6670; --show-l:#ddf0f3;
@@ -25,6 +26,88 @@
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
+/* ── MOBILE OPTIMIZATIONS ── */
+@media (max-width:600px){
+  .sidebar{display:none!important}
+  .main{margin-left:0!important;width:100%!important;}
+  .top{padding:8px 12px!important;}
+  .top-title{font-size:13px!important;}
+  .rg-hero{padding:16px 12px!important;}
+  .rg-icons{gap:8px!important;}
+  .rg-icon-btn{width:44px!important;height:44px!important;font-size:20px!important;}
+  .g2,.g3{grid-template-columns:1fr!important;}
+  .sg-namebar{grid-template-columns:100px 1fr!important;}
+  .sg-col-main{grid-template-columns:1fr!important;}
+  .mo-box{margin:8px!important;max-height:95vh!important;border-radius:14px!important;}
+  .card{padding:14px!important;}
+  #floatAddBtn{bottom:16px!important;right:14px!important;}
+  .ppl-inner-col-center{padding-left:0!important;}
+  .ev-toolbar{flex-wrap:wrap!important;gap:6px!important;}
+  .ev-filters{flex-direction:column!important;}
+  .rg-filter-pills{flex-wrap:wrap!important;}
+  .admin-btn span+span{display:none;}
+}
+@media (max-width:600px){
+  .mobile-tab-bar{display:flex!important;}
+  #floatAddBtn{display:none!important;}
+  body{padding-bottom:60px;}
+}
+.mobile-tab-bar{
+  display:none;position:fixed;bottom:0;left:0;right:0;
+  background:var(--card);border-top:1px solid var(--border);
+  z-index:400;padding:6px 0 env(safe-area-inset-bottom);
+}
+.mobile-tab-btn{
+  flex:1;display:flex;flex-direction:column;align-items:center;
+  gap:2px;font-size:9px;font-weight:600;color:var(--mid);
+  background:none;border:none;cursor:pointer;padding:4px 2px;
+  font-family:'Jost',sans-serif;
+}
+.mobile-tab-btn.active{color:var(--eve);}
+.mobile-tab-btn .m-icon{font-size:20px;line-height:1;}
+
+/* ── DARK MODE ── */
+[data-theme="dark"]{
+  --bg:#1a1816; --warm:#222018; --border:#3a3630;
+  --text:#e8e2d8; --mid:#a09688; --light:#6b6258;
+  --card:#222018; --shadow:rgba(0,0,0,.4);
+  --ink:#e8e2d8;
+  --ppl-l:#3a2800; --show-l:#001a1e; --link-l:#2a2010;
+  --mod-l:#1e1040; --store-l:#2a0808; --idea-l:#001a2e;
+  --net-l:#0a1e0a; --misc-l:#2a1008; --eve-l:#1e1040;
+  --purple-l:#1e1040;
+}
+[data-theme="dark"] input,[data-theme="dark"] textarea,[data-theme="dark"] select{
+  background:var(--warm)!important;color:var(--text)!important;border-color:var(--border)!important;
+}
+[data-theme="dark"] .mo-box{background:#2a2620;}
+[data-theme="dark"] .card{background:#222018;border-color:#3a3630;}
+[data-theme="dark"] .sg-dashed-box{background:#222018!important;border-color:#3a3630!important;}
+[data-theme="dark"] .hb{background:#2a2018!important;}
+[data-theme="dark"] .rg-hero{background:linear-gradient(135deg,#1e1814,#2a2018);}
+.voice-btn{padding:4px 10px;font-size:11px;font-weight:600;border:1.5px solid var(--border);border-radius:8px;background:var(--warm);color:var(--mid);cursor:pointer;font-family:'Jost',sans-serif;white-space:nowrap;transition:all .15s;}
+.voice-btn:hover{border-color:var(--eve);color:var(--eve);}
+.voice-btn.recording{background:#fce8e8;border-color:#c0392b;color:#c0392b;animation:pulse 1s infinite;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.6;}}
+[data-theme="dark"] .top{background:#1a1816;border-color:#3a3630;}
+[data-theme="dark"] .sidebar{background:#1a1816!important;border-color:#3a3630!important;}
+[data-theme="dark"] .page-tab{color:#a09688!important;border-color:transparent!important;}
+[data-theme="dark"] .page-tab:hover{background:#2a2620!important;}
+[data-theme="dark"] .page-tab.active{background:#2a2620!important;color:var(--eve)!important;border-color:var(--eve)!important;}
+[data-theme="dark"] .rg-table{background:#1a1816;}
+[data-theme="dark"] th{background:#222018!important;color:#a09688!important;}
+[data-theme="dark"] td{border-color:#3a3630!important;}
+[data-theme="dark"] .entry-card{background:#222018!important;border-color:#3a3630!important;}
+[data-theme="dark"] .rec-widget{background:#222018!important;border-color:#3a3630!important;}
+[data-theme="dark"] .ev-card{background:#222018!important;border-color:#3a3630!important;}
+[data-theme="dark"] .inbox-card{background:#222018!important;border-color:#3a3630!important;}
+[data-theme="dark"] .rg-crm-bar{background:#222018!important;border-color:#3a3630!important;}
+[data-theme="dark"] .rg-filter-pills{background:#1a1816!important;}
+[data-theme="dark"] .cp span{background:#2a2620!important;border-color:#3a3630!important;color:#e8e2d8!important;}
+[data-theme="dark"] .cp input:checked + span{background:var(--eve-l)!important;}
+[data-theme="dark"] .mo-box{background:#2a2620!important;border-color:#3a3630!important;}
+[data-theme="dark"] .rg-hero{background:linear-gradient(135deg,#1e1814,#2a2018)!important;}
+[data-theme="dark"] .sidebar{background:#1a1816;border-color:#3a3630;}
 body{font-family:'Jost',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:flex}
 
 /* PAGE BACKGROUND — mandala corner template */
@@ -64,7 +147,6 @@ body::before{
 .tab[data-p="people"].on{background:var(--ppl)}
 .tab[data-p="shows"].on{background:var(--show)}
 .tab[data-p="links"].on{background:var(--link)}
-.tab[data-p="expos"].on{background:var(--expo)}
 .tab[data-p="modalities"].on{background:var(--mod)}
 .tab[data-p="stores"].on{background:var(--store)}
 .tab[data-p="ideas"].on{background:var(--idea)}
@@ -349,6 +431,27 @@ body::before{
   background:var(--cur);border:none;color:#fff;cursor:pointer;font-family:'Jost',sans-serif;
   letter-spacing:.5px;box-shadow:0 2px 8px rgba(0,0,0,.15);transition:all .18s}
 .rg-add-btn:hover{filter:brightness(1.1);transform:translateY(-1px)}
+.bulk-bar{display:none;align-items:center;gap:10px;padding:8px 14px;background:var(--purple-l);
+  border:1.5px solid var(--eve);border-radius:10px;margin-bottom:10px;flex-wrap:wrap;}
+.bulk-bar.on{display:flex;}
+.bulk-bar-count{font-size:12px;font-weight:700;color:var(--eve);}
+.bulk-btn{padding:5px 12px;border-radius:7px;font-size:11px;font-weight:700;cursor:pointer;
+  border:1.5px solid currentColor;background:none;font-family:'Jost',sans-serif;transition:all .15s;}
+.bulk-btn.del{color:#c0392b;} .bulk-btn.del:hover{background:#fce8e8;}
+.bulk-btn.tag{color:var(--eve);} .bulk-btn.tag:hover{background:var(--eve-l);}
+.bulk-btn.exp{color:#2d7a3a;} .bulk-btn.exp:hover{background:#e8f0e6;}
+.bulk-btn.arch{color:#6b6258;} .bulk-btn.arch:hover{background:var(--warm);}
+.bulk-btn.fav{color:#e8a000;} .bulk-btn.fav:hover{background:#fdf5dc;}
+.row-cb{width:15px;height:15px;cursor:pointer;accent-color:var(--eve);}
+.star-btn{background:none;border:none;cursor:pointer;font-size:15px;padding:0 2px;
+  line-height:1;transition:transform .1s;opacity:.4;}
+.star-btn.on{opacity:1;}
+.star-btn:hover{transform:scale(1.3);opacity:1;}
+.status-badge{display:inline-block;font-size:9px;font-weight:700;padding:2px 7px;
+  border-radius:8px;letter-spacing:.5px;text-transform:uppercase;margin-left:4px;}
+.status-active{background:#e8f0e6;color:#2d7a3a;}
+.status-inactive{background:#f5ede0;color:#8b3a10;}
+.status-archived{background:#f0eee1;color:#a09688;}
 .rg-export-btn{padding:7px 14px;border-radius:8px;font-size:11px;font-weight:600;
   background:var(--card);border:1px solid var(--border);color:var(--mid);cursor:pointer;
   font-family:'Jost',sans-serif;transition:all .15s}
@@ -554,7 +657,7 @@ textarea{resize:vertical;line-height:1.6;min-height:72px}
 .sg-3col{display:grid;grid-template-columns:260px 1fr;gap:16px;margin-bottom:10px;align-items:start}
 .sg-col-photo,.sg-col-logo{display:flex;flex-direction:column;align-items:center;gap:6px}
 .sg-col-main{display:flex;flex-direction:column;gap:8px}
-.sg-photo-frame{width:180px;height:220px;border-radius:16px 16px 80px 80px;
+.sg-photo-frame{width:180px;height:220px;border-radius:80px 80px 16px 16px;
   border:2px dashed var(--border);cursor:pointer;display:flex;flex-direction:column;
   align-items:center;justify-content:center;gap:6px;background:var(--bg);
   transition:all .15s;background-size:cover;background-position:center top}
@@ -755,6 +858,7 @@ textarea{resize:vertical;line-height:1.6;min-height:72px}
         <span id="badgeText">Connect Google Sheets</span>
       </div>
       <button class="vis-btn" onclick="openMoVisibility()" title="Show / hide sections">⚙️ Sections</button>
+      <button class="admin-btn" id="darkModeBtn" onclick="toggleDarkMode()" title="Toggle dark mode" style="padding:6px 10px;font-size:16px;">🌙</button>
       <button class="admin-btn" id="userSignInBtn" onclick="openUserAuth()" style="background:var(--purple-l);border-color:var(--eve);color:var(--eve);">
         <span id="userSignInIcon">👤</span><span id="userSignInLabel">Sign In</span>
       </button>
@@ -774,12 +878,12 @@ textarea{resize:vertical;line-height:1.6;min-height:72px}
 <button class="rg-icon-btn" onclick="go('networking')" style="background:linear-gradient(135deg,#2d7a3a,#5aad68)" title="Networking">🤝</button>
 <button class="rg-icon-btn" onclick="go('vendors')" style="background:linear-gradient(135deg,#8b1a1a,#c0392b)" title="Vendors">🏪</button>
 <button class="rg-icon-btn" onclick="go('people')" style="background:linear-gradient(135deg,#c47a1a,#f0a030)" title="People">👥</button>
-<button class="rg-icon-btn" onclick="go('shows')" style="background:linear-gradient(135deg,#1a6670,#2d98a8)" title="Shows, Expos & Markets">🎪</button>
+<button class="rg-icon-btn" onclick="go('events')" style="background:linear-gradient(135deg,#1a6670,#2d98a8)" title="Events &amp; Vendor Log">🎪</button>
 <button class="rg-icon-btn" onclick="go('links')" style="background:linear-gradient(135deg,#9a8060,#c4a878)" title="Links">🔗</button>
 <button class="rg-icon-btn" onclick="go('modalities')" style="background:linear-gradient(135deg,#6030a8,#9060d0)" title="Modalities">🔮</button>
 <button class="rg-icon-btn" onclick="go('misc')" style="background:linear-gradient(135deg,#7a1010,#b02020)" title="Vault">📚</button>
         </div>
-        <div class="rg-labels"><span>Networking</span> <span class="dot-sep">•</span> <span>Vendors</span> <span class="dot-sep">•</span> <span>People</span> <span class="dot-sep">•</span> <span>Expos</span> <span class="dot-sep">•</span> <span>Links</span> <span class="dot-sep">•</span> <span>Modalities</span> <span class="dot-sep">•</span> <span>Vault</span></div>
+        <div class="rg-labels"><span>Networking</span> <span class="dot-sep">•</span> <span>Vendors</span> <span class="dot-sep">•</span> <span>People</span> <span class="dot-sep">•</span> <span>Events</span> <span class="dot-sep">•</span> <span>Links</span> <span class="dot-sep">•</span> <span>Modalities</span> <span class="dot-sep">•</span> <span>Vault</span></div>
         <div class="rg-health">
           <div class="rg-health-label">Rec. Health</div>
           <div class="rg-health-track"><div class="rg-health-fill" id="healthFill" style="width:0%"></div></div>
@@ -787,15 +891,40 @@ textarea{resize:vertical;line-height:1.6;min-height:72px}
         </div>
       </div>
       <div class="rg-tally-strip" id="tallyStrip"></div>
+
+      <!-- ── GLOBAL SEARCH ── -->
+      <div style="margin-bottom:14px;position:relative;">
+        <input type="text" id="globalSearchInput" placeholder="🔍  Search everything — people, shows, ideas, stores, modalities…"
+          oninput="renderGlobalSearch()"
+          style="width:100%;padding:12px 16px;border:2px solid var(--border);border-radius:12px;
+            font-family:'Jost',sans-serif;font-size:13px;background:var(--card);color:var(--ink);
+            box-sizing:border-box;transition:border-color .15s;"
+          onfocus="this.style.borderColor='var(--eve)'" onblur="this.style.borderColor='var(--border)'">
+        <div id="globalSearchResults" style="display:none;position:absolute;top:100%;left:0;right:0;
+          background:var(--card);border:1.5px solid var(--eve);border-radius:12px;
+          box-shadow:0 8px 32px var(--shadow);z-index:200;max-height:360px;overflow-y:auto;margin-top:4px;"></div>
+      </div>
+
+      <!-- ── FOLLOW-UP REMINDERS ── -->
+      <div id="homeFollowUps" style="display:none;margin-bottom:14px;"></div>
+
+      <!-- ── TAG CLOUD ── -->
+      <div id="homeTagCloud" style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px;min-height:28px;"></div>
+
       <div class="rg-crm-bar">
         <div class="rg-crm-title">Your Entries</div>
         <div class="rg-view-toggle">
           <button class="rg-vbtn on" id="btnTable" onclick="setView('table')">Table</button>
           <button class="rg-vbtn" id="btnCards" onclick="setView('cards')">Cards</button>
         </div>
-        <div class="ml-auto" style="display:flex;gap:8px">
-          <button class="rg-export-btn" onclick="exportCSV()">Export CSV</button>
-          <button class="rg-export-btn" id="syncAllBtn" onclick="syncAllToSheets()" style="background:#5a2db8;color:#fff;border-color:#5a2db8">☁ Sync All to Sheets</button>
+        <div class="ml-auto" style="display:flex;gap:6px;flex-wrap:wrap;">
+          <button class="rg-export-btn" onclick="exportBackupJSON()" title="Export everything as JSON">📦 Backup</button>
+          <label class="rg-export-btn" title="Restore from JSON backup" style="cursor:pointer;margin:0;">
+            📥 Restore<input type="file" accept=".json" onchange="importBackupJSON(this)" style="display:none;">
+          </label>
+          <button class="rg-export-btn" onclick="exportCSV()">CSV</button>
+          <button class="rg-export-btn" id="bulkToggleBtn" onclick="toggleBulkMode()" title="Select multiple entries">☑ Select</button>
+          <button class="rg-export-btn" id="syncAllBtn" onclick="syncAllToSheets()" style="background:#5a2db8;color:#fff;border-color:#5a2db8">☁ Sync</button>
           <button class="rg-add-btn" onclick="openAddEntry()">+ Add Entry</button>
         </div>
       </div>
@@ -805,16 +934,30 @@ textarea{resize:vertical;line-height:1.6;min-height:72px}
         <div class="rg-pill" data-filter="people" onclick="filterCRM('people',this)">People</div>
         <div class="rg-pill" data-filter="shows" onclick="filterCRM('shows',this)">Shows</div>
         <div class="rg-pill" data-filter="links" onclick="filterCRM('links',this)">Links</div>
-        <div class="rg-pill" data-filter="shows" onclick="filterCRM('shows',this)" style="display:none">Expos</div>
         <div class="rg-pill" data-filter="modalities" onclick="filterCRM('modalities',this)">Modalities</div>
         <div class="rg-pill" data-filter="stores" onclick="filterCRM('stores',this)">Stores</div>
         <div class="rg-pill" data-filter="ideas" onclick="filterCRM('ideas',this)">Ideas</div>
         <div class="rg-pill" data-filter="misc" onclick="filterCRM('misc',this)">Vault</div>
+        <div class="rg-pill" data-filter="__starred" onclick="filterCRM('__starred',this)">⭐ Starred</div>
+        <div class="rg-pill" data-filter="__archived" onclick="filterCRM('__archived',this)">🗂 Archived</div>
       </div>
+      <!-- ── BULK ACTION BAR ── -->
+      <div class="bulk-bar" id="bulkBar">
+        <span class="bulk-bar-count" id="bulkCount">0 selected</span>
+        <button class="bulk-btn fav"  onclick="bulkAction('star')">⭐ Star</button>
+        <button class="bulk-btn tag"  onclick="bulkTagPrompt()">🏷 Tag</button>
+        <button class="bulk-btn arch" onclick="bulkAction('archive')">🗂 Archive</button>
+        <button class="bulk-btn exp"  onclick="bulkAction('export')">📦 Export</button>
+        <button class="bulk-btn del"  onclick="bulkAction('delete')">🗑 Delete</button>
+        <button class="bulk-btn" onclick="bulkSelectAll()" style="color:var(--mid);">Select All</button>
+        <button class="bulk-btn" onclick="bulkClear()" style="color:var(--mid);">✕ Clear</button>
+      </div>
+
       <div id="crmTableView">
         <div class="rg-table-wrap">
           <table class="rg-table">
             <thead><tr>
+              <th style="width:28px;"><input type="checkbox" class="row-cb" id="selectAllCb" onchange="bulkSelectAllToggle(this)" style="display:none;"></th>
               <th>Name / Section</th><th>Trust</th><th>Resonance</th><th>Alignment</th><th></th>
             </tr></thead>
             <tbody id="crmTableBody">
@@ -830,6 +973,9 @@ textarea{resize:vertical;line-height:1.6;min-height:72px}
           <div style="grid-column:1/-1;text-align:center;padding:32px;color:var(--light)">No entries yet.</div>
         </div>
       </div>
+      <!-- ── REVENUE SUMMARY ── -->
+      <div id="homeRevenueSummary" style="display:none;margin-bottom:16px;"></div>
+
       <div class="rg-insights">
         <div class="rg-insights-title">✦ Pattern Insights ✦</div>
         <div class="rg-ins-grid">
@@ -857,7 +1003,7 @@ textarea{resize:vertical;line-height:1.6;min-height:72px}
   </div>
   <div class="guide-section"><h3>🤝 Business Networking</h3><p>Track networking groups, memberships, meetups and collaborations. Record why each group matters and whether it's aligned with your goals.</p></div>
   <div class="guide-section"><h3>👥 People & Contacts</h3><p>Your relationship map. Log collaborators, clients, leads, and allies with energy/vibe notes.</p></div>
-  <div class="guide-section"><h3>🎪 Shows, Expos & Markets</h3><p>Track every event you vend at — psychic fairs, wellness expos, craft shows, spiritual markets and more. Record fees, what's included, booth logistics, and whether it's worth returning.</p></div>
+  <div class="guide-section"><h3>🎪 Events &amp; Vendor Log</h3><p>Browse upcoming shows, markets, expos, retreats and pop-ups. Use the Vendor Log to record booth details, fees, revenue, and whether each event is worth returning to.</p></div>
   <div class="guide-section"><h3>🔗 Links & Websites</h3><p>Save resources, educational hubs, support communities, and tools — with notes on when and why to use each.</p></div>
   
   <div class="guide-section"><h3>🔮 Modalities & Resources</h3><p>Catalog skills and services you offer, tools and techniques you use, certifications and training.</p></div>
@@ -1331,6 +1477,19 @@ textarea{resize:vertical;line-height:1.6;min-height:72px}
           <div style="font-size:13px;font-weight:700;"><strong>Collaboration Notes:</strong> <span class="tip tip-right"><span class="tip-icon">?</span><span class="tip-box">Past projects, referral exchanges, upcoming collabs, or ideas for working together. Keeps your creative partnership history in one place.</span></span></div>
           <button type="button" class="pv-eye" id="pvebtn-ppl-collab" onclick="togglePV('ppl-collab')" title="Hide this section for this contact">👁</button>
         </div>
+        <div class="g2" style="margin-bottom:6px;">
+          <div class="f"><label style="font-size:10px;">Referred By</label><input type="text" name="referred_by" placeholder="Who connected you?" style="border:none;border-bottom:1px solid var(--border);background:transparent;font-size:12px;color:var(--mid);width:100%;"></div>
+          <div class="f"><label style="font-size:10px;">Have We Collaborated?</label>
+            <select name="collab_status" style="border:none;border-bottom:1px solid var(--border);background:transparent;font-size:12px;color:var(--mid);width:100%;">
+              <option value="">— Select —</option>
+              <option>✅ Yes — ongoing</option>
+              <option>✓ Yes — completed</option>
+              <option>💬 In discussion</option>
+              <option>🔄 Referred each other</option>
+              <option>❌ Not yet</option>
+            </select>
+          </div>
+        </div>
         <textarea name="collab_notes" rows="3" placeholder="Past projects, upcoming plans, referral notes, collaboration ideas..."
           style="border:none;background:transparent;padding:0;box-shadow:none;width:100%;resize:vertical;font-size:13px;color:var(--mid);line-height:1.7;"></textarea>
       </div><!-- /vs-ppl-collab -->
@@ -1662,168 +1821,6 @@ textarea{resize:vertical;line-height:1.6;min-height:72px}
     </div>
     </div><!-- /page-people -->
 
-    <!-- ══ SHOWS ══ -->
-    <div class="page" id="page-shows">
-      <div class="ph">
-        <div class="ph-icon" style="background:linear-gradient(135deg,#1f6670,#2d98a8);">🎪</div>
-        <h1>Shows, Expos & Markets</h1>
-        <div class="sub" style="color:var(--show);">Psychic Fairs · Wellness Expos · Craft Shows · Markets</div>
-        <p class="desc">Track every event you attend or vend at — shows, expos, fairs, and markets all in one place. Record booth logistics, fees, what's included, and whether it's worth returning.</p>
-      </div>
-      
-      <button class="view-entries-btn" onclick="viewSectionEntries('shows')" style="background:var(--show);margin-bottom:20px;">📋 View Saved Entries</button>
-      <div id="vs-evw-shows">
-      <div id="evWidget-shows" class="ev-widget" onclick="toggleEvWidget('shows')">
-        <div class="ev-widget-head"><h4>📅 Upcoming Shows, Expos &amp; Markets</h4><span class="ev-widget-count" id="evWidgetCount-shows">0</span><span class="ev-widget-chevron">▾</span></div>
-        <div class="ev-widget-body" id="evWidgetBody-shows"></div>
-      </div>
-      </div>
-      
-      <form onsubmit="send(event,'shows',this)">
-        <div class="card">
-          <div class="ct"><div class="ct-dot" style="background:var(--show)"></div>Event Information<span class="tip ct-tip"><span class="tip-icon">?</span><span class="tip-box">The basics — what kind of event, where, and when. Use this to compare events side-by-side when deciding where to invest your time and booth budget.</span></span></div>
-          <div class="f"><label>Event Name *</label><input type="text" name="event_name" placeholder="Type here..." required></div>
-          <div class="f"><label>Event Type</label><div class="cg">
-            <label class="cp"><input type="checkbox" name="type_psychic"><span>🔮 Psychic Fair</span></label>
-            <label class="cp"><input type="checkbox" name="type_wellness"><span>💚 Wellness Expo</span></label>
-            <label class="cp"><input type="checkbox" name="type_craft"><span>✂️ Craft Show</span></label>
-            <label class="cp"><input type="checkbox" name="type_spiritual"><span>✨ Spiritual Market</span></label>
-            <label class="cp"><input type="checkbox" name="type_show"><span>🎪 Show</span></label>
-            <label class="cp"><input type="checkbox" name="type_expo"><span>🎡 Expo</span></label>
-            <label class="cp"><input type="checkbox" name="type_market"><span>🛍️ Market</span></label>
-            <label class="cp"><input type="checkbox" name="type_other"><span>➕ Other</span></label>
-          </div></div>
-          <div class="f" id="show-other-wrapper" style="display:none;"><label>Other Event Type (specify)</label><input type="text" name="type_other_text" placeholder="Describe the event type..."></div>
-          <div class="g2">
-            <div class="f"><label>Location</label><input type="text" name="location" placeholder="Venue, City, State"></div>
-            <div class="f"><label>Website</label><input type="url" name="website" placeholder="URL"></div>
-          </div>
-          <div class="f"><label>Organizer Contact</label><input type="text" name="organizer" placeholder="Name, Email, Phone"></div>
-        </div>
-
-        <div class="card">
-          <div class="ct"><div class="ct-dot" style="background:var(--show)"></div>Dates & Schedule<span class="tip ct-tip"><span class="tip-icon">?</span><span class="tip-box">When is this event and how long does it run? Knowing the number of days helps you plan inventory, energy, and whether the cost-per-day makes sense.</span></span></div>
-          <div class="g2">
-            <div class="f"><label>📅 Start Date</label>
-              <input type="date" name="dates" id="showStartDate"
-                style="font-size:15px;padding:10px 14px;border:2px solid var(--border);border-radius:10px;
-                width:100%;background:var(--warm);color:var(--ink);font-family:inherit;cursor:pointer;"
-                onfocus="this.style.borderColor='var(--show)'" onblur="this.style.borderColor='var(--border)'">
-            </div>
-            <div class="f"><label>📅 End Date <span style="font-weight:400;color:var(--light)">(multi-day)</span></label>
-              <input type="date" name="end_date" id="showEndDate"
-                style="font-size:15px;padding:10px 14px;border:2px solid var(--border);border-radius:10px;
-                width:100%;background:var(--warm);color:var(--ink);font-family:inherit;cursor:pointer;"
-                onfocus="this.style.borderColor='var(--show)'" onblur="this.style.borderColor='var(--border)'">
-            </div>
-          </div>
-          <div class="g2">
-            <div class="f"><label>Number of Days</label><div class="cg">
-              <label class="cp"><input type="radio" name="num_days" value="1"><span>1</span></label>
-              <label class="cp"><input type="radio" name="num_days" value="2"><span>2</span></label>
-              <label class="cp"><input type="radio" name="num_days" value="3"><span>3</span></label>
-              <label class="cp"><input type="radio" name="num_days" value="4+"><span>4+</span></label>
-            </div></div>
-            <div class="f"><label>Attendance Size</label><input type="text" name="attendance" placeholder="Est. #"></div>
-          </div>
-          <div class="f"><label>How Often Does This Event Occur?</label><div class="cg">
-            <label class="cp"><input type="radio" name="events_per_year" value="1x" onchange="updateShowFrequency(this)"><span>1× Year</span></label>
-            <label class="cp"><input type="radio" name="events_per_year" value="2x" onchange="updateShowFrequency(this)"><span>2× Year</span></label>
-            <label class="cp"><input type="radio" name="events_per_year" value="3x" onchange="updateShowFrequency(this)"><span>3× Year</span></label>
-            <label class="cp"><input type="radio" name="events_per_year" value="4+" onchange="updateShowFrequency(this)"><span>4+/Year</span></label>
-            <label class="cp"><input type="radio" name="events_per_year" value="market-2x" onchange="updateShowFrequency(this)"><span>🛍️ Market 2×</span></label>
-            <label class="cp"><input type="radio" name="events_per_year" value="market-3x" onchange="updateShowFrequency(this)"><span>🛍️ Market 3×</span></label>
-            <label class="cp"><input type="radio" name="events_per_year" value="expo-2x" onchange="updateShowFrequency(this)"><span>🎡 Expo 2×</span></label>
-            <label class="cp"><input type="radio" name="events_per_year" value="expo-3x" onchange="updateShowFrequency(this)"><span>🎡 Expo 3×</span></label>
-          </div></div>
-
-          <!-- Dynamic occurrence date blocks (shown for 2x / 3x options) -->
-          <div id="show-occurrences" style="display:none;margin-top:12px;"></div>
-        </div>
-
-        <div class="card">
-          <div class="ct"><div class="ct-dot" style="background:var(--show)"></div>Fees & Booth Details<span class="tip ct-tip"><span class="tip-icon">?</span><span class="tip-box">All the costs and logistics for your booth space. Knowing what is included vs. extra helps you budget accurately and avoid surprises on setup day.</span></span></div>
-          <div class="g2">
-            <div class="f"><label>Fees</label><input type="text" name="booth_fee" placeholder="$ booth / vendor fee"></div>
-            <div class="f"><label>Setup Size</label><input type="text" name="setup_size" placeholder="10×10, 6ft table..."></div>
-          </div>
-          <div class="f"><label>What's Included</label><div class="cg">
-            <label class="cp"><input type="checkbox" name="incl_chair"><span>🪑 Chair(s)</span></label>
-            <label class="cp"><input type="checkbox" name="incl_table"><span>🪵 Table(s)</span></label>
-            <label class="cp"><input type="checkbox" name="incl_elec"><span>⚡ Electricity</span></label>
-          </div></div>
-          <div class="f"><label>Electricity</label><div class="cg">
-            <label class="cp"><input type="checkbox" name="elec_included"><span>✓ Included</span></label>
-            <label class="cp"><input type="checkbox" name="elec_extra" onchange="toggleElecFee(this)"><span>+ Extra Cost</span></label>
-          </div></div>
-          <div class="f" id="elec-fee-wrapper" style="display:none;"><label>Electricity Extra Cost</label><input type="text" name="elec_extra_fee" placeholder="$ amount"></div>
-          <div class="g2">
-            <div class="f"><label>Indoor / Outdoor</label><div class="cg">
-              <label class="cp"><input type="checkbox" name="ws_indoor"><span>Indoor</span></label>
-              <label class="cp"><input type="checkbox" name="ws_outdoor"><span>Outdoor</span></label>
-            </div></div>
-            <div class="f"><label>Worth Doing Again?</label><div class="cg">
-              <label class="cp"><input type="checkbox" name="worth_yes"><span>✓ Yes</span></label>
-              <label class="cp"><input type="checkbox" name="worth_no"><span>✗ No</span></label>
-              <label class="cp"><input type="checkbox" name="worth_maybe"><span>~ Maybe</span></label>
-            </div></div>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="ct"><div class="ct-dot" style="background:var(--show)"></div>Flyer & Files<span class="tip ct-tip"><span class="tip-icon">?</span><span class="tip-box">Upload a flyer, photo, or any image for this event. It will be saved with the record and shown in your entries list. JPG, PNG, or WebP up to 6 MB.</span></span></div>
-          <div class="f">
-            <div id="showFlyerZone"
-              style="border:2px dashed var(--border);border-radius:10px;padding:22px;text-align:center;
-                cursor:pointer;background:var(--warm);transition:all .2s;position:relative"
-              ondragover="event.preventDefault();this.style.borderColor='var(--show)'"
-              ondragleave="this.style.borderColor='var(--border)'"
-              ondrop="handleShowFlyerDrop(event)">
-              <input type="file" id="showFlyerInput" accept="image/*,application/pdf"
-                onchange="handleShowFlyerUpload(this)"
-                style="position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%">
-              <div id="showFlyerPrompt">
-                <div style="font-size:32px;margin-bottom:6px">🖼️</div>
-                <div style="font-size:12px;font-weight:600;color:var(--mid)">Drag &amp; drop flyer, or click to browse</div>
-                <div style="font-size:10px;color:var(--light);margin-top:3px">JPG · PNG · WebP · PDF · Max 6 MB</div>
-              </div>
-              <div id="showFlyerPreview" style="display:none">
-                <img id="showFlyerImg" style="max-height:200px;max-width:100%;border-radius:8px;display:block;margin:0 auto 8px">
-                <div id="showFlyerName" style="font-size:11px;color:var(--mid);margin-bottom:4px"></div>
-                <button type="button" onclick="clearShowFlyer()"
-                  style="background:none;border:1px solid var(--border);border-radius:6px;padding:4px 12px;
-                  font-size:10px;cursor:pointer;font-family:inherit;color:var(--mid)">✕ Remove</button>
-              </div>
-            </div>
-            <input type="hidden" id="showFlyerB64" name="show_flyer_b64">
-            <input type="hidden" id="showFlyerMime" name="show_flyer_mime">
-            <input type="hidden" id="showFlyerFileName" name="show_flyer_name">
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="ct"><div class="ct-dot" style="background:var(--show)"></div>Event Notes<span class="tip ct-tip"><span class="tip-icon">?</span><span class="tip-box">What worked, what didn't, whether you'd go back. Capture this right after the event while it's fresh — your future self will thank you.</span></span></div>
-          <div class="f"><textarea name="event_notes" rows="5" placeholder="Type here..."></textarea></div>
-        </div>
-        
-        <div class="rec-widget">
-          <div class="rec-title">Recommendation</div>
-          <div class="rec-row">
-            <label class="rec-btn yes">
-              <input type="radio" name="recommend" value="yes" onchange="tallyRec()">
-              <span>👍 Recommend</span>
-            </label>
-            <label class="rec-btn no">
-              <input type="radio" name="recommend" value="no" onchange="tallyRec()">
-              <span>👎 Not Recommend</span>
-            </label>
-          </div>
-          <textarea name="rec_comment" class="rec-comment" placeholder="Add a comment about your recommendation..."></textarea>
-        </div>
-        <div class="sb-bar"><button type="submit" class="sb-btn" style="background:var(--show)" id="sb-shows">Save Event Record</button></div>
-      </form>
-    </div>
-
     <!-- ══ LINKS ══ -->
     <div class="page" id="page-links">
       <div class="ph">
@@ -1913,19 +1910,7 @@ textarea{resize:vertical;line-height:1.6;min-height:72px}
       </form>
     </div>
 
-    <!-- ══ EXPOS — redirects to shows ══ -->
-    <div class="page" id="page-expos">
-      <div class="ph">
-        <div class="ph-icon" style="background:linear-gradient(135deg,#1f6670,#2d98a8);">🎡</div>
-        <h1>Shows, Expos & Markets</h1>
-        <div class="sub" style="color:var(--show);">Now combined with Shows</div>
-        <p class="desc">All shows, expos, and markets are now tracked in one place.</p>
-      </div>
-      <div style="padding:24px;text-align:center;">
-        <p style="color:var(--mid);font-size:15px;margin-bottom:20px;">Shows, Expos & Markets are now combined into a single section for easier tracking.</p>
-        <button class="sb-btn" style="background:var(--show);display:inline-block;" onclick="go('shows')">🎪 Go to Shows, Expos & Markets →</button>
-      </div>
-    </div>
+
 
     <!-- ══ MODALITIES ══ -->
     <div class="page" id="page-modalities">
@@ -1958,7 +1943,7 @@ textarea{resize:vertical;line-height:1.6;min-height:72px}
               <label class="cp"><input type="checkbox" name="cat_other"><span>➕ Other</span></label>
             </div></div>
           </div>
-          <div class="f" id="modality-other-wrapper" style="display:none;"><label>Other Category (specify)</label><input type="text" name="cat_other_text" placeholder="Describe the category..."></div>
+          <div class="f" id="modality-other-wrapper"><label>Other Category (specify)</label><input type="text" name="cat_other_text" placeholder="Describe the category..."></div>
           <div class="f"><label>Description (Layman's Terms)</label><textarea name="description" rows="3" placeholder="Simple explanation anyone could understand..."></textarea></div>
           <div class="g2">
             <div class="f"><label>Ideal Client / Use Case</label><textarea name="ideal_client" rows="3" placeholder="Who benefits the most..."></textarea></div>
@@ -2040,7 +2025,7 @@ textarea{resize:vertical;line-height:1.6;min-height:72px}
         <div class="card">
           <div class="ct"><div class="ct-dot" style="background:var(--store)"></div>Store Details<span class="tip ct-tip"><span class="tip-icon">?</span><span class="tip-box">Track retail shops, boutiques, and wellness spaces that could carry your work or partner with you. Include the buyer's name so you know exactly who to contact.</span></span></div>
           <div class="f"><label>Store Name *</label><input type="text" name="store_name" placeholder="Type here..." required></div>
-          <div class="f"><label>Type</label><div class="cg">
+          <div class="f"><label>Store Type</label><div class="cg">
             <label class="cp"><input type="checkbox" name="type_metaphysical"><span>🔮 Metaphysical</span></label>
             <label class="cp"><input type="checkbox" name="type_boutique"><span>👗 Boutique</span></label>
             <label class="cp"><input type="checkbox" name="type_wellness"><span>💚 Wellness</span></label>
@@ -2048,7 +2033,13 @@ textarea{resize:vertical;line-height:1.6;min-height:72px}
             <label class="cp"><input type="checkbox" name="type_supplier"><span>📦 Supplier</span></label>
             <label class="cp"><input type="checkbox" name="type_other"><span>➕ Other</span></label>
           </div></div>
-          <div class="f" id="store-other-wrapper" style="display:none;"><label>Other Type (specify)</label><input type="text" name="type_other_text" placeholder="Describe the store type..."></div>
+          <div class="f" id="store-other-wrapper" style="display:none;"><label>Other Store Type (specify)</label><input type="text" name="type_other_text" placeholder="Describe the store type..."></div>
+          <div class="f" style="margin-top:6px;"><label>Vendor Opportunity</label><div class="cg">
+            <label class="cp"><input type="checkbox" name="opp_consignment"><span>📋 Consignment</span></label>
+            <label class="cp"><input type="checkbox" name="opp_wholesale"><span>📦 Wholesale</span></label>
+            <label class="cp"><input type="checkbox" name="opp_popup"><span>🎪 Pop-Up Events</span></label>
+            <label class="cp"><input type="checkbox" name="opp_permanent"><span>🏠 Permanent Vendor</span></label>
+          </div></div>
           <div class="f"><label>Additional Type Notes</label><input type="text" name="type_notes" placeholder="Describe further..."></div>
           <div class="g2">
             <div class="f"><label>Location</label><input type="text" name="location" placeholder="City, State"></div>
@@ -2060,13 +2051,7 @@ textarea{resize:vertical;line-height:1.6;min-height:72px}
           </div>
         </div>
         <div class="card">
-          <div class="ct"><div class="ct-dot" style="background:var(--store)"></div>Vendor Opportunities<span class="tip ct-tip"><span class="tip-icon">?</span><span class="tip-box">What selling models does this store support? Check all that apply — consignment, wholesale, pop-up, or permanent shelf space. Helps you pitch the right arrangement from the start.</span></span></div>
-          <div class="f"><label>Opportunity Type</label><div class="cg">
-            <label class="cp"><input type="checkbox" name="opp_consignment"><span>📋 Consignment</span></label>
-            <label class="cp"><input type="checkbox" name="opp_wholesale"><span>📦 Wholesale</span></label>
-            <label class="cp"><input type="checkbox" name="opp_popup"><span>🎪 Pop-Up Events</span></label>
-            <label class="cp"><input type="checkbox" name="opp_permanent"><span>🏠 Permanent Vendor</span></label>
-          </div></div>
+          <div class="ct"><div class="ct-dot" style="background:var(--store)"></div>Submission & Follow-Up
           <div class="g2">
             <div class="f"><label>Submission Requirements</label><textarea name="submission_req" rows="3" placeholder="Enter notes..."></textarea></div>
             <div class="f"><label>Additional Information</label><textarea name="additional_info" rows="3" placeholder="Enter notes..."></textarea></div>
@@ -2183,7 +2168,7 @@ textarea{resize:vertical;line-height:1.6;min-height:72px}
               </div></div>
             </div>
           </div>
-          <div class="f" id="idea-other-wrapper" style="display:none;margin-top:8px;"><label>Other Idea Type (specify)</label><input type="text" name="itype_other_text" placeholder="Describe the idea type..."></div>
+          <div class="f" id="idea-other-wrapper" style="margin-top:8px;"><label>Other Idea Type (specify)</label><input type="text" name="itype_other_text" placeholder="Describe the idea type..."></div>
           <div class="f" style="margin-top:8px;"><label>Next Steps</label><div class="cg">
             <label class="cp"><input type="checkbox" name="next_research"><span>🔬 Research</span></label>
             <label class="cp"><input type="checkbox" name="next_outline"><span>📋 Outline</span></label>
@@ -2195,7 +2180,14 @@ textarea{resize:vertical;line-height:1.6;min-height:72px}
         <div class="card">
           <div class="ct"><div class="ct-dot" style="background:var(--idea)"></div>Notes</div>
           <div class="f"><label>Summary (Layman's Terms)</label><textarea name="summary" rows="3" placeholder="What this resource actually helps with..."></textarea></div>
-          <div class="f"><label>Personal Notes Stage</label><div class="cg" style="margin-bottom:8px;">
+          <div class="f">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">
+              <label style="flex:1;margin:0;">Personal Notes</label>
+              <button type="button" class="voice-btn" onclick="startVoice(this,'ideaNotesTA')" title="Speak your notes">🎤 Voice</button>
+            </div>
+            <textarea id="ideaNotesTA" name="personal_notes" rows="3" placeholder="Type or tap 🎤 Voice to speak..."></textarea>
+          </div>
+          <div class="f"><label>Notes Stage</label><div class="cg" style="margin-bottom:8px;">
             <label class="cp"><input type="checkbox" name="note_research"><span>Research</span></label>
             <label class="cp"><input type="checkbox" name="note_test"><span>Test</span></label>
             <label class="cp"><input type="checkbox" name="note_outline"><span>Outline</span></label>
@@ -2203,7 +2195,7 @@ textarea{resize:vertical;line-height:1.6;min-height:72px}
             <label class="cp"><input type="checkbox" name="note_launch"><span>Launch</span></label>
             <label class="cp"><input type="checkbox" name="note_archived"><span>Archived</span></label>
           </div>
-          <textarea name="personal_notes" rows="3" placeholder="How you use it, favorite parts, cautions, ideas sparked..."></textarea></div>
+          </div>
         </div>
         
         <div class="rec-widget">
@@ -2312,7 +2304,13 @@ textarea{resize:vertical;line-height:1.6;min-height:72px}
         </div>
         <div class="card">
           <div class="ct"><div class="ct-dot" style="background:var(--misc)"></div>Description &amp; Access<span class="tip ct-tip"><span class="tip-icon">?</span><span class="tip-box">Summarize why you saved this and where to find it. Paste a URL, a Drive link, or just note "borrowed from Maya" — anything that helps future you access it fast.</span></span></div>
-          <div class="f"><label>Description / Summary / Notes</label><textarea name="description" rows="4" placeholder="What this is, why it matters, where it came from..."></textarea></div>
+          <div class="f">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">
+              <label style="flex:1;margin:0;">Description / Summary / Notes</label>
+              <button type="button" class="voice-btn" onclick="startVoice(this,'vaultDescTA')" title="Speak your notes">🎤 Voice</button>
+            </div>
+            <textarea id="vaultDescTA" name="description" rows="4" placeholder="Type or tap 🎤 Voice to speak..."></textarea>
+          </div>
           <div class="f"><label>Link / Access Info</label><textarea name="access_info" rows="2" placeholder="Website, IG handle, episode link, screenshot reference..."></textarea></div>
           <div class="f"><label>♦ Why This Is Stored</label>
             <div class="hb" style="background:#fdefd8;border:1px solid rgba(139,58,16,.15);">
@@ -2371,11 +2369,26 @@ textarea{resize:vertical;line-height:1.6;min-height:72px}
     <!-- ══ UPCOMING EVENTS ══ -->
     <div class="page" id="page-events">
       <div class="ph">
-        <div class="ph-icon" style="background:linear-gradient(135deg,#6b2fa0,#9050d8);">📅</div>
-        <h1>Upcoming Events</h1>
-        <div class="sub" style="color:var(--eve)">Fairs · Markets · Expos · Workshops · Pop-Ups</div>
-        <p class="desc">All upcoming events in one place — sorted by date, searchable by modality, location, and type. Add your own or submit one for review.</p>
+        <div class="ph-icon" style="background:linear-gradient(135deg,#1f6670,#6b2fa0);">📅</div>
+        <h1>Events &amp; Vendor Opportunities</h1>
+        <div class="sub" style="color:var(--eve)">Upcoming Calendar · Vendor Log · Shows · Expos · Retreats · Pop-Ups</div>
+        <p class="desc">Browse upcoming events on the calendar, and use the Vendor Log to record your booth details, fees, and results from every show you attend.</p>
       </div>
+
+      <!-- ── INNER TABS ── -->
+      <div style="display:flex;gap:0;margin-bottom:20px;border:1.5px solid var(--border);border-radius:12px;overflow:hidden;flex-shrink:0;">
+        <button id="evInnerTabUpcoming" onclick="switchEvInnerTab('upcoming')"
+          style="flex:1;padding:10px 8px;text-align:center;font-size:12px;font-weight:700;background:var(--eve-l);color:var(--eve);border:none;cursor:pointer;font-family:'Jost',sans-serif;border-right:1px solid var(--border);">
+          📅 Upcoming Events
+        </button>
+        <button id="evInnerTabVendor" onclick="switchEvInnerTab('vendor')"
+          style="flex:1;padding:10px 8px;text-align:center;font-size:12px;font-weight:700;background:var(--warm);color:var(--mid);border:none;cursor:pointer;font-family:'Jost',sans-serif;">
+          🎪 Vendor Log
+        </button>
+      </div>
+
+      <!-- ══ UPCOMING EVENTS PANEL ══ -->
+      <div id="evPanelUpcoming">
 
       <!-- Toolbar -->
       <div class="ev-toolbar">
@@ -2402,6 +2415,7 @@ textarea{resize:vertical;line-height:1.6;min-height:72px}
             <option>🎓 Class / Course</option>
             <option>🤝 Networking</option>
             <option>🎵 Sound Bath</option>
+            <option>🏕️ Retreat</option>
             <option>➕ Other</option>
           </select>
         </div>
@@ -2589,7 +2603,199 @@ textarea{resize:vertical;line-height:1.6;min-height:72px}
         <h4 id="evDayPopupTitle"></h4>
         <div id="evDayPopupList"></div>
       </div>
+      </div><!-- /ev-calendar -->
+
+      </div><!-- /evPanelUpcoming -->
+
+      <!-- ══ VENDOR LOG PANEL ══ -->
+      <div id="evPanelVendor" style="display:none;">
+        <div class="ph" style="margin-bottom:16px;padding:16px 20px;">
+          <h2 style="font-size:18px;margin:0 0 4px;color:var(--show);">🎪 Vendor Log</h2>
+          <div style="font-size:12px;color:var(--mid);">Record every event you vend at — fees, booth details, sales, and whether it's worth returning.</div>
+        </div>
+<button class="view-entries-btn" onclick="viewSectionEntries('shows')" style="background:var(--show);margin-bottom:20px;">📋 View Saved Entries</button>
+      <div id="vs-evw-shows">
+      <div id="evWidget-shows" class="ev-widget" onclick="toggleEvWidget('shows')">
+        <div class="ev-widget-head"><h4>📅 Upcoming Shows, Expos &amp; Markets</h4><span class="ev-widget-count" id="evWidgetCount-shows">0</span><span class="ev-widget-chevron">▾</span></div>
+        <div class="ev-widget-body" id="evWidgetBody-shows"></div>
+      </div>
+      </div>
+      
+      <form onsubmit="send(event,'shows',this)">
+        <div class="card">
+          <div class="ct"><div class="ct-dot" style="background:var(--show)"></div>Event Information<span class="tip ct-tip"><span class="tip-icon">?</span><span class="tip-box">The basics — what kind of event, where, and when. Use this to compare events side-by-side when deciding where to invest your time and booth budget.</span></span></div>
+          <div class="f"><label>Event Name *</label><input type="text" name="event_name" placeholder="Type here..." required></div>
+          <div class="f"><label>Event Type</label><div class="cg">
+            <label class="cp"><input type="checkbox" name="type_psychic"><span>🔮 Psychic Fair</span></label>
+            <label class="cp"><input type="checkbox" name="type_wellness"><span>💚 Wellness Expo</span></label>
+            <label class="cp"><input type="checkbox" name="type_craft"><span>✂️ Craft Show</span></label>
+            <label class="cp"><input type="checkbox" name="type_spiritual"><span>✨ Spiritual Market</span></label>
+            <label class="cp"><input type="checkbox" name="type_show"><span>🎪 Show</span></label>
+            <label class="cp"><input type="checkbox" name="type_expo"><span>🎡 Expo</span></label>
+            <label class="cp"><input type="checkbox" name="type_market"><span>🛍️ Market</span></label>
+            <label class="cp"><input type="checkbox" name="type_festival"><span>🎉 Festival</span></label>
+            <label class="cp"><input type="checkbox" name="type_popup"><span>🏪 Pop-Up</span></label>
+            <label class="cp"><input type="checkbox" name="type_retreat"><span>🏕️ Retreat</span></label>
+            <label class="cp"><input type="checkbox" name="type_other"><span>➕ Other</span></label>
+          </div></div>
+          <div class="f" id="show-other-wrapper" style="display:none;"><label>Other Event Type (specify)</label><input type="text" name="type_other_text" placeholder="Describe the event type..."></div>
+          <div class="g2">
+            <div class="f"><label>Location</label><input type="text" name="location" placeholder="Venue, City, State"></div>
+            <div class="f"><label>Website</label><input type="url" name="website" placeholder="URL"></div>
+          </div>
+          <div class="f"><label>Organizer Contact</label><input type="text" name="organizer" placeholder="Name, Email, Phone"></div>
+        </div>
+
+        <div class="card">
+          <div class="ct"><div class="ct-dot" style="background:var(--show)"></div>Dates & Schedule<span class="tip ct-tip"><span class="tip-icon">?</span><span class="tip-box">When is this event and how long does it run? Knowing the number of days helps you plan inventory, energy, and whether the cost-per-day makes sense.</span></span></div>
+          <div class="g2">
+            <div class="f"><label>📅 Start Date</label>
+              <input type="date" name="dates" id="showStartDate"
+                style="font-size:15px;padding:10px 14px;border:2px solid var(--border);border-radius:10px;
+                width:100%;background:var(--warm);color:var(--ink);font-family:inherit;cursor:pointer;"
+                onfocus="this.style.borderColor='var(--show)'" onblur="this.style.borderColor='var(--border)'">
+            </div>
+            <div class="f"><label>📅 End Date <span style="font-weight:400;color:var(--light)">(multi-day)</span></label>
+              <input type="date" name="end_date" id="showEndDate"
+                style="font-size:15px;padding:10px 14px;border:2px solid var(--border);border-radius:10px;
+                width:100%;background:var(--warm);color:var(--ink);font-family:inherit;cursor:pointer;"
+                onfocus="this.style.borderColor='var(--show)'" onblur="this.style.borderColor='var(--border)'">
+            </div>
+          </div>
+          <div class="g2">
+            <div class="f"><label>Number of Days</label><div class="cg">
+              <label class="cp"><input type="radio" name="num_days" value="1"><span>1</span></label>
+              <label class="cp"><input type="radio" name="num_days" value="2"><span>2</span></label>
+              <label class="cp"><input type="radio" name="num_days" value="3"><span>3</span></label>
+              <label class="cp"><input type="radio" name="num_days" value="4+"><span>4+</span></label>
+            </div></div>
+            <div class="f"><label>Attendance Size</label><input type="text" name="attendance" placeholder="Est. #"></div>
+          </div>
+          <div class="f"><label>How Often Does This Event Occur?</label><div class="cg">
+            <label class="cp"><input type="radio" name="events_per_year" value="1x" onchange="updateShowFrequency(this)"><span>1× Year</span></label>
+            <label class="cp"><input type="radio" name="events_per_year" value="2x" onchange="updateShowFrequency(this)"><span>2× Year</span></label>
+            <label class="cp"><input type="radio" name="events_per_year" value="3x" onchange="updateShowFrequency(this)"><span>3× Year</span></label>
+            <label class="cp"><input type="radio" name="events_per_year" value="4+" onchange="updateShowFrequency(this)"><span>4+/Year</span></label>
+            <label class="cp"><input type="radio" name="events_per_year" value="market-2x" onchange="updateShowFrequency(this)"><span>🛍️ Market 2×</span></label>
+            <label class="cp"><input type="radio" name="events_per_year" value="market-3x" onchange="updateShowFrequency(this)"><span>🛍️ Market 3×</span></label>
+            <label class="cp"><input type="radio" name="events_per_year" value="expo-2x" onchange="updateShowFrequency(this)"><span>🎡 Expo 2×</span></label>
+            <label class="cp"><input type="radio" name="events_per_year" value="expo-3x" onchange="updateShowFrequency(this)"><span>🎡 Expo 3×</span></label>
+          </div></div>
+
+          <!-- Dynamic occurrence date blocks (shown for 2x / 3x options) -->
+          <div id="show-occurrences" style="display:none;margin-top:12px;"></div>
+        </div>
+
+        <div class="card">
+          <div class="ct"><div class="ct-dot" style="background:var(--show)"></div>Fees & Booth Details<span class="tip ct-tip"><span class="tip-icon">?</span><span class="tip-box">All the costs and logistics for your booth space. Knowing what is included vs. extra helps you budget accurately and avoid surprises on setup day.</span></span></div>
+          <div class="g2">
+            <div class="f"><label>Fees</label><input type="text" name="booth_fee" placeholder="$ booth / vendor fee"></div>
+            <div class="f"><label>Setup Size</label><input type="text" name="setup_size" placeholder="10×10, 6ft table..."></div>
+          </div>
+          <div class="f"><label>What's Included</label><div class="cg">
+            <label class="cp"><input type="checkbox" name="incl_chair"><span>🪑 Chair(s)</span></label>
+            <label class="cp"><input type="checkbox" name="incl_table"><span>🪵 Table(s)</span></label>
+            <label class="cp"><input type="checkbox" name="incl_elec"><span>⚡ Electricity</span></label>
+            <label class="cp"><input type="checkbox" name="incl_other" onchange="document.getElementById('incl-other-wrap').style.display=this.checked?'':'none'"><span>➕ Other</span></label>
+          </div></div>
+          <div class="f" id="incl-other-wrap" style="display:none;"><label>Other Included (specify)</label><input type="text" name="incl_other_text" placeholder="e.g., Wi-Fi, parking, signage..."></div>
+          <div class="f"><label>Electricity</label><div class="cg">
+            <label class="cp"><input type="checkbox" name="elec_included"><span>✓ Included</span></label>
+            <label class="cp"><input type="checkbox" name="elec_extra" onchange="toggleElecFee(this)"><span>+ Extra Cost</span></label>
+            <label class="cp"><input type="checkbox" name="elec_unknown"><span>❓ Unknown</span></label>
+          </div></div>
+          <div class="f" id="elec-fee-wrapper" style="display:none;"><label>Electricity Extra Cost</label><input type="text" name="elec_extra_fee" placeholder="$ amount"></div>
+          <div class="g2">
+            <div class="f"><label>Indoor / Outdoor</label><div class="cg">
+              <label class="cp"><input type="checkbox" name="ws_indoor"><span>Indoor</span></label>
+              <label class="cp"><input type="checkbox" name="ws_outdoor"><span>Outdoor</span></label>
+            </div></div>
+            <div class="f"><label>Worth Doing Again?</label><div class="cg">
+              <label class="cp"><input type="checkbox" name="worth_yes"><span>✓ Yes</span></label>
+              <label class="cp"><input type="checkbox" name="worth_no"><span>✗ No</span></label>
+              <label class="cp"><input type="checkbox" name="worth_maybe"><span>~ Maybe</span></label>
+              <label class="cp"><input type="checkbox" name="worth_unsure"><span>❓ Unsure</span></label>
+            </div></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="ct"><div class="ct-dot" style="background:var(--show)"></div>Flyer & Files<span class="tip ct-tip"><span class="tip-icon">?</span><span class="tip-box">Upload a flyer, photo, or any image for this event. It will be saved with the record and shown in your entries list. JPG, PNG, or WebP up to 6 MB.</span></span></div>
+          <div class="f">
+            <div id="showFlyerZone"
+              style="border:2px dashed var(--border);border-radius:10px;padding:22px;text-align:center;
+                cursor:pointer;background:var(--warm);transition:all .2s;position:relative"
+              ondragover="event.preventDefault();this.style.borderColor='var(--show)'"
+              ondragleave="this.style.borderColor='var(--border)'"
+              ondrop="handleShowFlyerDrop(event)">
+              <input type="file" id="showFlyerInput" accept="image/*,application/pdf"
+                onchange="handleShowFlyerUpload(this)"
+                style="position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%">
+              <div id="showFlyerPrompt">
+                <div style="font-size:32px;margin-bottom:6px">🖼️</div>
+                <div style="font-size:12px;font-weight:600;color:var(--mid)">Drag &amp; drop flyer, or click to browse</div>
+                <div style="font-size:10px;color:var(--light);margin-top:3px">JPG · PNG · WebP · PDF · Max 6 MB</div>
+              </div>
+              <div id="showFlyerPreview" style="display:none">
+                <img id="showFlyerImg" style="max-height:200px;max-width:100%;border-radius:8px;display:block;margin:0 auto 8px">
+                <div id="showFlyerName" style="font-size:11px;color:var(--mid);margin-bottom:4px"></div>
+                <button type="button" onclick="clearShowFlyer()"
+                  style="background:none;border:1px solid var(--border);border-radius:6px;padding:4px 12px;
+                  font-size:10px;cursor:pointer;font-family:inherit;color:var(--mid)">✕ Remove</button>
+              </div>
+            </div>
+            <input type="hidden" id="showFlyerB64" name="show_flyer_b64">
+            <input type="hidden" id="showFlyerMime" name="show_flyer_mime">
+            <input type="hidden" id="showFlyerFileName" name="show_flyer_name">
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="ct"><div class="ct-dot" style="background:var(--show)"></div>Event Notes<span class="tip ct-tip"><span class="tip-icon">?</span><span class="tip-box">What worked, what didn't, whether you'd go back. Capture this right after the event while it's fresh — your future self will thank you.</span></span></div>
+          <div class="f">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">
+              <label style="flex:1;margin:0;">Notes</label>
+              <button type="button" class="voice-btn" onclick="startVoice(this,'showNotesTA')" title="Speak your notes">🎤 Voice</button>
+            </div>
+            <textarea id="showNotesTA" name="event_notes" rows="5" placeholder="Type or tap 🎤 Voice to speak..."></textarea>
+          </div>
+        </div>
+        
+        <div class="rec-widget">
+          <div class="rec-title">Recommendation</div>
+          <div class="rec-row">
+            <label class="rec-btn yes">
+              <input type="radio" name="recommend" value="yes" onchange="tallyRec()">
+              <span>👍 Recommend</span>
+            </label>
+            <label class="rec-btn no">
+              <input type="radio" name="recommend" value="no" onchange="tallyRec()">
+              <span>👎 Not Recommend</span>
+            </label>
+          </div>
+          <textarea name="rec_comment" class="rec-comment" placeholder="Add a comment about your recommendation..."></textarea>
+        </div>
+        <div class="card">
+          <div class="ct"><div class="ct-dot" style="background:var(--show)"></div>💰 Revenue Tracker<span class="tip ct-tip"><span class="tip-icon">?</span><span class="tip-box">Track your actual sales and expenses at this event so you can calculate profit and decide if it's worth returning.</span></span></div>
+          <div class="g3">
+            <div class="f"><label>Total Sales ($)</label><input type="number" name="sales_total" placeholder="0.00" step="0.01" min="0"></div>
+            <div class="f"><label>Total Expenses ($)</label><input type="number" name="expenses_total" placeholder="0.00" step="0.01" min="0"></div>
+            <div class="f"><label>Net Profit ($)</label><input type="number" name="net_profit" placeholder="Auto or enter" step="0.01" id="showNetProfit" readonly style="background:var(--warm);font-weight:700;color:var(--show);"></div>
+          </div>
+          <div class="g2">
+            <div class="f"><label>Best Selling Item(s)</label><input type="text" name="best_sellers" placeholder="e.g., Crystal sets, readings..."></div>
+            <div class="f"><label>Avg Sale Amount</label><input type="number" name="avg_sale" placeholder="$0.00" step="0.01" min="0"></div>
+          </div>
+          <div class="f"><label>Revenue Notes</label><textarea name="revenue_notes" rows="2" placeholder="What worked, what didn't, pricing observations..."></textarea></div>
+        </div>
+        <div class="sb-bar"><button type="submit" class="sb-btn" style="background:var(--show)" id="sb-shows">Save Event Record</button></div>
+      </form>
     </div>
+
+
+      </div><!-- /evPanelVendor -->
+
+    </div><!-- /page-events -->
 
 
     <!-- ══ DIVINE MELANATED MYSTICS ══ -->
@@ -2748,6 +2954,7 @@ textarea{resize:vertical;line-height:1.6;min-height:72px}
             <div style="background:#f3e8ff;border-radius:10px;padding:10px 14px;margin-bottom:14px;font-size:12px;color:#4a1470;line-height:1.6;">
               ✦ So we can add you or send info — please share how to reach you on Signal. Signal uses your phone number.
             </div>
+            <div style="font-size:11px;color:var(--light);font-style:italic;margin-bottom:8px;">🔒 Your name and email information will not be shared publicly.</div>
             <div class="g2">
               <div class="f"><label>Your Name <span style="color:#c0392b">*</span></label>
                 <input type="text" id="dmmName" name="dmm_name" placeholder="What should we call you?"></div>
@@ -2764,6 +2971,7 @@ textarea{resize:vertical;line-height:1.6;min-height:72px}
 
           <!-- Anonymous fields — shown when Not right now -->
           <div id="dmmAnonFields" style="padding:18px 20px;border-top:1px solid var(--border);">
+            <div style="font-size:11px;color:var(--light);font-style:italic;margin-bottom:10px;">🔒 Your name and email information will not be shared publicly.</div>
             <div class="g2">
               <div class="f"><label>Your Name <span style="font-size:11px;color:var(--light)">(optional — submissions can be anonymous)</span></label>
                 <input type="text" name="submitter_name" placeholder="Your name or leave blank"></div>
@@ -2919,9 +3127,7 @@ textarea{resize:vertical;line-height:1.6;min-height:72px}
   <button class="tab" data-p="events" onclick="go('events')">📅 Events</button>
   <button class="tab" data-p="mandala" onclick="go('mandala')">🔮 Mandala</button>
   <button class="tab" data-p="people" onclick="go('people')">People</button>
-  <button class="tab" data-p="shows" onclick="go('shows')">🎪 Shows</button>
   <button class="tab" data-p="links" onclick="go('links')">Links</button>
-  <button class="tab" data-p="expos" onclick="go('shows')" style="display:none;">Expos</button>
   <button class="tab" data-p="modalities" onclick="go('modalities')">Modalities</button>
   <button class="tab" data-p="stores" onclick="go('stores')">Stores</button>
   <button class="tab" data-p="ideas" onclick="go('ideas')">Ideas</button>
@@ -2934,6 +3140,48 @@ textarea{resize:vertical;line-height:1.6;min-height:72px}
 <div id="imgZoomOverlay" onclick="closeImgZoom()">
   <span class="zm-close" onclick="closeImgZoom()">✕</span>
   <img id="imgZoomTarget" src="" alt="Enlarged image">
+</div>
+
+
+<!-- ── MOBILE TAB BAR ── -->
+<div class="mobile-tab-bar" id="mobileTabBar">
+  <button class="mobile-tab-btn" onclick="go('home')" id="mtb-home"><span class="m-icon">🏠</span>Home</button>
+  <button class="mobile-tab-btn" onclick="go('people')" id="mtb-people"><span class="m-icon">👥</span>People</button>
+  <button class="mobile-tab-btn" onclick="go('events')" id="mtb-shows"><span class="m-icon">🎪</span>Events</button>
+  <button class="mobile-tab-btn" onclick="go('ideas')" id="mtb-ideas"><span class="m-icon">💡</span>Ideas</button>
+  <button class="mobile-tab-btn" onclick="openQuickAdd()" id="mtb-add" style="color:var(--eve);"><span class="m-icon">✦</span>Add</button>
+</div>
+
+<!-- ── FLOATING QUICK-ADD BUTTON ── -->
+<div id="floatAddBtn" onclick="openQuickAdd()"
+  style="position:fixed;bottom:80px;right:20px;width:52px;height:52px;
+    background:linear-gradient(135deg,#5a2db8,#8b2fc9);
+    border-radius:50%;display:flex;align-items:center;justify-content:center;
+    cursor:pointer;box-shadow:0 4px 20px rgba(90,45,184,0.5);z-index:500;
+    font-size:24px;color:#fff;transition:transform .15s,box-shadow .15s;
+    user-select:none;" title="Quick Add"
+  onmouseenter="this.style.transform='scale(1.1)';this.style.boxShadow='0 6px 28px rgba(90,45,184,0.7)'"
+  onmouseleave="this.style.transform='scale(1)';this.style.boxShadow='0 4px 20px rgba(90,45,184,0.5)'">
+  ✦
+</div>
+
+<!-- ── QUICK-ADD MODAL ── -->
+<div class="mo" id="moQuickAdd">
+  <div class="mo-box" style="max-width:400px;">
+    <button class="mo-close" onclick="closeMo('moQuickAdd')">✕</button>
+    <h2>✦ Quick Add</h2>
+    <p style="font-size:13px;color:var(--mid);margin-bottom:20px;">Where would you like to add a new entry?</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+      <button onclick="quickGoTo('people')"   class="mo-btn" style="padding:14px;font-size:13px;border-radius:12px;background:var(--ppl-l);color:var(--ppl);border-color:var(--ppl);">👤 Person</button>
+      <button onclick="quickGoTo('shows')"    class="mo-btn" style="padding:14px;font-size:13px;border-radius:12px;background:var(--show-l);color:var(--show);border-color:var(--show);">🎪 Event</button>
+      <button onclick="quickGoTo('ideas')"    class="mo-btn" style="padding:14px;font-size:13px;border-radius:12px;background:var(--idea-l);color:var(--idea);border-color:var(--idea);">💡 Idea</button>
+      <button onclick="quickGoTo('stores')"   class="mo-btn" style="padding:14px;font-size:13px;border-radius:12px;background:var(--store-l);color:var(--store);border-color:var(--store);">🏪 Store</button>
+      <button onclick="quickGoTo('modalities')" class="mo-btn" style="padding:14px;font-size:13px;border-radius:12px;background:var(--mod-l);color:var(--mod);border-color:var(--mod);">🔮 Modality</button>
+      <button onclick="quickGoTo('networking')" class="mo-btn" style="padding:14px;font-size:13px;border-radius:12px;background:var(--net-l);color:var(--net);border-color:var(--net);">🤝 Networking</button>
+      <button onclick="quickGoTo('misc')"     class="mo-btn" style="padding:14px;font-size:13px;border-radius:12px;background:var(--misc-l);color:var(--misc);border-color:var(--misc);">📚 Vault</button>
+      <button onclick="quickGoTo('links')"    class="mo-btn" style="padding:14px;font-size:13px;border-radius:12px;background:var(--link-l);color:var(--link);border-color:var(--link);">🔗 Link</button>
+    </div>
+  </div>
 </div>
 
 <!-- MODALS -->
@@ -3411,6 +3659,12 @@ function setupOtherToggles() {
 }
 
 function go(p) {
+  // Redirect shows to events vendor tab
+  if(p === 'shows' || p === 'expos') {
+    p = 'events';
+    setTimeout(function(){ switchEvInnerTab('vendor'); }, 50);
+  }
+  updateMobileTabBar(p);
   document.querySelectorAll('.tab').forEach(function(t) { t.classList.toggle('on', t.dataset.p===p); });
   document.querySelectorAll('.page').forEach(function(x) { x.classList.toggle('on', x.id==='page-'+p); });
   document.documentElement.style.setProperty('--cur', COLORS[p]||COLORS['home']);
@@ -3863,7 +4117,7 @@ function renderRecords(filter) {
 }
 function clearAllRecords() {
   if(!confirm('Clear ALL locally saved records?')) return;
-  localStorage.removeItem(RECORDS_KEY); renderRecords(); renderCRM(); renderTallyStrip();
+  localStorage.removeItem(RECORDS_KEY); renderRecords(); renderCRM(); renderTallyStrip(); renderFollowUpReminders(); renderRevenueSummary();
   toast('🗑 All records cleared.','');
 }
 
@@ -3923,6 +4177,16 @@ async function send(e, section, form) {
   e.preventDefault();
   var btn=document.getElementById('sb-'+section);
   var data=collectData(form, section);
+
+  // ── Duplicate check for people and shows ──────────────────────────────────
+  if(section === 'people' || section === 'shows') {
+    var checkName = data.name || data.event_name || '';
+    var dupes = checkDuplicate(checkName, section);
+    if(dupes && dupes.length) {
+      var dupeNames = dupes.map(function(d){ return '"' + getEntryName(d) + '"'; }).join(', ');
+      if(!confirm('⚠ Similar entry already exists: ' + dupeNames + '.\n\nSave anyway?')) return;
+    }
+  }
   if(section==='people') {
     extractAndSaveGlobalTags(data);
     var tok=localStorage.getItem(PPL_OWNER_KEY)||generateToken();
@@ -3949,7 +4213,7 @@ async function send(e, section, form) {
     if(ok) toast('✅ Saved to Google Sheets!','ok');
     else if(url) toast('⚠ Sheets unreachable — saved locally.','er');
     else toast('💾 Saved locally. Connect Sheets to sync.','');
-    form.reset(); resetStars(); resetTagBuilders(); resetPV(); if(section==='shows') clearShowFlyer(); ['networking','modalities','stores','links','ideas','misc'].forEach(function(s){var p={networking:'netImg',modalities:'modImg',stores:'storeLogo',links:'linkThumb',ideas:'ideaImg',misc:'vaultImg'}[s];if(document.getElementById(p+'B64'))clearSectionUpload(p);}); modalityLinkedTags=[]; renderModalityTags(); refreshModalitySuggestions(); renderTally(); renderCRM(); renderTallyStrip(); if(typeof buildMandala==='function') buildMandala(); if(vaultCatOpen) renderVaultByCategory();
+    form.reset(); resetStars(); resetTagBuilders(); resetPV(); if(section==='shows') clearShowFlyer(); ['networking','modalities','stores','links','ideas','misc'].forEach(function(s){var p={networking:'netImg',modalities:'modImg',stores:'storeLogo',links:'linkThumb',ideas:'ideaImg',misc:'vaultImg'}[s];if(document.getElementById(p+'B64'))clearSectionUpload(p);}); modalityLinkedTags=[]; renderModalityTags(); refreshModalitySuggestions(); renderTally(); renderCRM(); renderTallyStrip(); renderHomeTagCloud(); if(typeof buildMandala==='function') buildMandala(); if(vaultCatOpen) renderVaultByCategory();
     resetPhoto('photoLabel','photoIcon','👤','photoB64','photoMime'); resetPhoto('logoLabel','logoIcon','🏢','logoB64','logoMime');
     ['show-other-wrapper','modality-other-wrapper','store-other-wrapper','idea-other-wrapper'].forEach(function(id) {
       var el=document.getElementById(id); if(el) el.style.display='none';
@@ -3958,6 +4222,8 @@ async function send(e, section, form) {
 }
 
 function filterCRM(filter, el) {
+  // __starred and __archived are special filters
+
   crmFilter=filter;
   document.querySelectorAll('.rg-pill').forEach(function(p) { p.classList.toggle('on',p.dataset.filter===filter); });
   renderCRM();
@@ -3984,7 +4250,17 @@ function renderDots(score, max, cls) {
 }
 function renderCRM() {
   var all=JSON.parse(localStorage.getItem(RECORDS_KEY)||'[]');
-  var filtered=crmFilter==='all'?all:all.filter(function(r){return r._section===crmFilter;});
+  var filtered;
+  if(crmFilter==='__starred')       filtered=all.filter(function(r){return r._starred;});
+  else if(crmFilter==='__archived') filtered=all.filter(function(r){return r._status==='archived';});
+  else if(crmFilter==='all')        filtered=all.filter(function(r){return r._status!=='archived';});
+  else                              filtered=all.filter(function(r){return r._section===crmFilter&&r._status!=='archived';});
+  // Sort: starred first, then by timestamp desc
+  filtered=filtered.slice().sort(function(a,b){
+    if(a._starred&&!b._starred) return -1;
+    if(!a._starred&&b._starred) return 1;
+    return (b._timestamp||'').localeCompare(a._timestamp||'');
+  });
   var withRec=all.filter(function(r){return r.recommend;});
   var yes=withRec.filter(function(r){return r.recommend==='yes';}).length;
   var pct=withRec.length?Math.round(yes/withRec.length*100):0;
@@ -4002,12 +4278,24 @@ function renderCRM() {
       var sc=COLORS[r._section]||'#888';
       var lt=LIGHTS[r._section]||'var(--border)';
       var idx=all.indexOf(r);
-      return '<tr><td><span class="rg-name-cell">'+name.slice(0,36)+'</span>' +
-        '<span class="rg-sec-badge" style="color:'+sc+';background:'+lt+'">'+( r._section||'')+'</span></td>' +
+      var starred=r._starred?'on':'';
+      var statusHtml=r._status&&r._status!=='active'?
+        '<span class="status-badge status-'+r._status+'">'+r._status+'</span>':'';
+      var cbStyle=_bulkMode?'':'display:none;';
+      return '<tr data-idx="'+idx+'" id="crow-'+idx+'" style="'+(r._starred?'background:rgba(232,160,0,.05)':'')+'">' +
+        '<td style="width:28px;padding:4px 0 4px 8px;"><input type="checkbox" class="row-cb bulk-cb" style="'+cbStyle+'" data-idx="'+idx+'" onchange="bulkCbChange(this)"></td>' +
+        '<td><button class="star-btn '+starred+'" onclick="toggleStar('+idx+')" title="Star this entry">'+(r._starred?'⭐':'☆')+'</button>' +
+        '<span class="rg-name-cell">'+name.slice(0,30)+'</span>' +
+        '<span class="rg-sec-badge" style="color:'+sc+';background:'+lt+'">'+( r._section||'')+'</span>'+statusHtml+'</td>' +
         '<td>'+renderDots(trust,6,'')+'</td>' +
         '<td>'+renderDots(res,6,'gold')+'</td>' +
         '<td>'+renderDots(align,6,'teal')+'</td>' +
         '<td><div class="act-btns">' +
+        '<select onchange="setStatus('+idx+',this.value)" title="Set status" style="font-size:9px;padding:2px 4px;border-radius:5px;border:1px solid var(--border);background:var(--bg);color:var(--mid);cursor:pointer;font-family:inherit;">' +
+        '<option value="active" '+((!r._status||r._status==='active')?'selected':'')+'>Active</option>' +
+        '<option value="inactive" '+(r._status==='inactive'?'selected':'')+'>Inactive</option>' +
+        '<option value="archived" '+(r._status==='archived'?'selected':'')+'>Archived</option>' +
+        '</select>' +
         '<button class="act-btn" onclick="openEditEntry('+idx+')">Edit</button>' +
         '<button class="act-btn del" onclick="deleteEntry('+idx+')">Del</button>' +
         '</div></td></tr>';
@@ -4032,8 +4320,11 @@ function renderCRM() {
         '<div class="cc-score"><div class="cc-score-label">Resonance</div><div class="cc-score-val" style="color:var(--ppl)">'+(res||'—')+'</div></div>' +
         '</div>' +
         (tags?'<div style="font-size:10px;color:var(--light);margin-bottom:8px">🏷 '+tags+'</div>':'') +
-        '<div class="cc-btns">' +
+        '<div class="cc-btns" style="display:flex;align-items:center;gap:6px;">' +
+        (r._starred?'<span style="font-size:14px;">⭐</span>':'') +
+        (r._status&&r._status!=="active"?'<span class="status-badge status-'+r._status+'">'+r._status+'</span>':'') +
         '<button class="cc-edit-btn" onclick="openEditEntry('+idx+')">Edit</button>' +
+        '<button class="cc-edit-btn" onclick="toggleStar('+idx+')" style="background:none;border-color:#e8a000;color:#e8a000;">'+(r._starred?'Unstar':'⭐ Star')+'</button>' +
         '<button class="cc-del-btn" onclick="deleteEntry('+idx+')">Delete</button>' +
         '</div></div>';
     }).join('');
@@ -4247,7 +4538,7 @@ function resetTagBuilders() {
 function renderTally() {
   var records=JSON.parse(localStorage.getItem(RECORDS_KEY)||'[]');
   var sections=['networking','people','shows','links','expos','modalities','stores','ideas','misc'];
-  var labels={networking:'Networking',people:'People & Contacts',shows:'Shows, Expos & Markets',links:'Links',
+  var labels={networking:'Networking',people:'People & Contacts',shows:'Events & Vendor Log',links:'Links',
     expos:'Shows',modalities:'Modalities',stores:'Stores',ideas:'Ideas',misc:'Resource Vault'};
   var body=document.getElementById('tally-body'); if(!body) return;
   var html='', totalY=0, totalN=0;
@@ -5002,7 +5293,7 @@ var inboxFilterMode = 'all';
 var SEC_META = {
   people:     { label:'People',     color:'#c47a1a', light:'#fdf0dc', name_field:'name' },
   networking: { label:'Networking', color:'#2d5a27', light:'#e8f0e6', name_field:'org_name' },
-  shows:      { label:'Shows, Expos & Markets', color:'#1f6670', light:'#ddf0f3', name_field:'event_name', flyer_field:'show_flyer_b64', flyer_mime:'show_flyer_mime' },
+  shows:      { label:'Events & Vendor Log', color:'#1f6670', light:'#ddf0f3', name_field:'event_name', flyer_field:'show_flyer_b64', flyer_mime:'show_flyer_mime' },
   expos:      { label:'Expos',      color:'#1f6670', light:'#ddf0f3', name_field:'expo_name' },
   modalities: { label:'Modalities', color:'#5a2db8', light:'#ede5ff', name_field:'modality_name' },
   stores:     { label:'Stores',     color:'#a02020', light:'#fce8e8', name_field:'store_name' },
@@ -6048,8 +6339,14 @@ function showPersonDetail(i) {
   var actionsHtml = '<div style="border-top:1px solid var(--border);margin-top:14px;padding-top:12px;display:flex;gap:8px;flex-wrap:wrap;">' +
       (isOwner ? '<button onclick="editPersonEntry(&quot;' + p._timestamp + '&quot;)" style="background:var(--ppl);color:#fff;border:none;border-radius:8px;padding:8px 16px;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;">&#9999; Edit Entry</button>' : '') +
       (isOwner ? '<button onclick="deletePersonEntry(&quot;' + p._timestamp + '&quot;)" style="background:#c44;color:#fff;border:none;border-radius:8px;padding:8px 16px;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;">&#128465; Delete</button>' : '') +
+      '<button onclick="printPersonProfile(' + JSON.stringify(i) + ')" style="background:#f3e8ff;color:#5a2db8;border:1.5px solid #c9a0f5;border-radius:8px;padding:8px 16px;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;">🖨 Print Profile</button>' +
       (!isOwner ? '<span style="font-size:11px;color:var(--light);font-style:italic;padding:8px 0;"><a href="#" onclick="openUserAuth();return false;" style="color:var(--eve);">Sign in</a> to edit or delete this entry</span>' : '') +
       '</div>';
+  var collabRow = (p.referred_by || p.collab_status) ?
+    '<div style="display:flex;gap:12px;margin-top:6px;flex-wrap:wrap;">' +
+    (p.referred_by ? '<div style="font-size:11px;background:var(--purple-l);color:var(--eve);padding:3px 10px;border-radius:10px;">🔗 Referred by: ' + p.referred_by + '</div>' : '') +
+    (p.collab_status ? '<div style="font-size:11px;background:var(--purple-l);color:var(--eve);padding:3px 10px;border-radius:10px;">🤝 ' + p.collab_status + '</div>' : '') +
+    '</div>' : '';
   var recBtn = '<div style="margin-top:10px;"><button onclick="prefillRec(&quot;' + (p.name||'').replace(/"/g,'&quot;') + '&quot;)" style="background:var(--ppl);color:#fff;border:none;border-radius:8px;padding:8px 16px;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;">&#128156; Recommend This Person</button></div>';
 
   document.getElementById('personDetailContent').innerHTML =
@@ -6060,6 +6357,7 @@ function showPersonDetail(i) {
     (p.exp_level ? '<div style="margin-top:6px;"><span style="background:rgba(107,47,160,.1);color:var(--ppl);border-radius:8px;padding:3px 10px;font-size:11px;">' + p.exp_level + '</span></div>' : '') +
     '</div>' +
     (p.bio ? '<p style="margin-top:10px;font-size:13px;color:var(--mid);line-height:1.7;">' + p.bio + '</p>' : '') +
+    collabRow +
     (seeking.length ? '<div style="margin-top:8px;"><strong style="font-size:11px;">Seeking: </strong>' + seeking.map(function(s){ return '<span style="font-size:11px;background:rgba(107,47,160,.07);color:var(--ppl);border-radius:6px;padding:2px 8px;margin-left:4px;">' + s + '</span>'; }).join('') + '</div>' : '') +
     (p.modalities ? '<div style="margin-top:8px;font-size:12px;"><strong>Modalities:</strong> ' + p.modalities + '</div>' : '') +
     (p.specialty_tags ? '<div style="margin-top:4px;font-size:12px;"><strong>Specialties:</strong> ' + p.specialty_tags + '</div>' : '') +
@@ -6825,6 +7123,8 @@ function initPrefContactStars() {
 document.addEventListener('DOMContentLoaded', function() {
   setTimeout(initPrefContactStars, 300);
   updateUserBtn();
+  renderFollowUpReminders(); renderRevenueSummary();
+  renderHomeTagCloud();
 });
 
 // ── SOCIAL SECTION: sort filled first, hide empty, inline edit ───────────────
@@ -6902,7 +7202,278 @@ function makeFieldEditable(el, onSave) {
   input.addEventListener('keydown', function(e) { if(e.key==='Enter') { e.preventDefault(); save(); } if(e.key==='Escape') { el.textContent=original; el.dataset.editing='0'; } });
 }
 
+// ── DARK MODE ─────────────────────────────────────────────────────────────────
+function toggleDarkMode() {
+  var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  document.documentElement.setAttribute('data-theme', isDark ? '' : 'dark');
+  localStorage.setItem('rg_dark_mode', isDark ? '' : 'dark');
+  var btn = document.getElementById('darkModeBtn');
+  if(btn) btn.textContent = isDark ? '🌙' : '☀️';
+}
+(function(){
+  var saved = localStorage.getItem('rg_dark_mode');
+  if(saved === 'dark') {
+    document.documentElement.setAttribute('data-theme','dark');
+    var btn = document.getElementById('darkModeBtn');
+    if(btn) btn.textContent = '☀️';
+  }
+})();
+
+// ── VOICE TO TEXT ─────────────────────────────────────────────────────────────
+function startVoice(btn, targetId) {
+  if(!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
+    toast('Voice input not supported in this browser. Try Chrome.', 'er'); return;
+  }
+  var SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+  var recognition = new SpeechRecognition();
+  recognition.lang = 'en-US';
+  recognition.continuous = false;
+  recognition.interimResults = false;
+  btn.classList.add('recording');
+  btn.textContent = '🔴 Listening…';
+  recognition.onresult = function(e) {
+    var transcript = e.results[0][0].transcript;
+    var ta = document.getElementById(targetId);
+    if(ta) { ta.value = (ta.value ? ta.value + ' ' : '') + transcript; }
+    btn.classList.remove('recording');
+    btn.textContent = '🎤 Voice';
+    toast('Voice captured ✦', 'ok');
+  };
+  recognition.onerror = function() {
+    btn.classList.remove('recording');
+    btn.textContent = '🎤 Voice';
+    toast('Could not capture voice. Try again.', 'er');
+  };
+  recognition.onend = function() {
+    btn.classList.remove('recording');
+    btn.textContent = '🎤 Voice';
+  };
+  recognition.start();
+}
+
+
+
+
+// ── EVENTS INNER TABS ─────────────────────────────────────────────────────────
+function switchEvInnerTab(tab) {
+  var upcoming = document.getElementById('evPanelUpcoming');
+  var vendor   = document.getElementById('evPanelVendor');
+  var btnUp    = document.getElementById('evInnerTabUpcoming');
+  var btnVend  = document.getElementById('evInnerTabVendor');
+  var isUp     = tab === 'upcoming';
+  if(upcoming) upcoming.style.display = isUp ? '' : 'none';
+  if(vendor)   vendor.style.display   = isUp ? 'none' : '';
+  if(btnUp) {
+    btnUp.style.background  = isUp ? 'var(--eve-l)' : 'var(--warm)';
+    btnUp.style.color       = isUp ? 'var(--eve)'   : 'var(--mid)';
+  }
+  if(btnVend) {
+    btnVend.style.background = isUp ? 'var(--warm)' : 'var(--eve-l)';
+    btnVend.style.color      = isUp ? 'var(--mid)'  : 'var(--eve)';
+  }
+}
+
+// ── STAR / FAVOURITE ──────────────────────────────────────────────────────────
+function toggleStar(idx) {
+  var all = JSON.parse(localStorage.getItem(RECORDS_KEY)||'[]');
+  if(!all[idx]) return;
+  all[idx]._starred = !all[idx]._starred;
+  localStorage.setItem(RECORDS_KEY, JSON.stringify(all));
+  renderCRM();
+  toast(all[idx]._starred ? '\u2b50 Starred!' : 'Unstarred','ok');
+}
+
+// ── ENTRY STATUS ───────────────────────────────────────────────────────────────
+function setStatus(idx, status) {
+  var all = JSON.parse(localStorage.getItem(RECORDS_KEY)||'[]');
+  if(!all[idx]) return;
+  all[idx]._status = status;
+  localStorage.setItem(RECORDS_KEY, JSON.stringify(all));
+  renderCRM();
+  toast('Status: '+status,'ok');
+}
+
+// ── BULK ACTIONS ───────────────────────────────────────────────────────────────
+var _bulkMode = false;
+var _bulkSelected = new Set();
+
+function toggleBulkMode() {
+  _bulkMode = !_bulkMode;
+  _bulkSelected.clear();
+  var btn = document.getElementById('bulkToggleBtn');
+  if(btn){btn.textContent=_bulkMode?'\u2715 Cancel':'\u2611 Select';btn.style.background=_bulkMode?'#fce8e8':'';btn.style.color=_bulkMode?'#c0392b':'';btn.style.borderColor=_bulkMode?'#c0392b':'';}
+  var bar=document.getElementById('bulkBar');
+  if(bar) bar.classList.toggle('on',_bulkMode);
+  var selAllCb=document.getElementById('selectAllCb');
+  if(selAllCb) selAllCb.style.display=_bulkMode?'':'none';
+  renderCRM();
+}
+
+function bulkCbChange(cb) {
+  var idx=parseInt(cb.dataset.idx);
+  if(cb.checked) _bulkSelected.add(idx); else _bulkSelected.delete(idx);
+  var c=document.getElementById('bulkCount');
+  if(c) c.textContent=_bulkSelected.size+' selected';
+}
+
+function bulkSelectAll() {
+  document.querySelectorAll('.bulk-cb').forEach(function(cb){
+    cb.checked=true; _bulkSelected.add(parseInt(cb.dataset.idx));
+  });
+  var c=document.getElementById('bulkCount'); if(c) c.textContent=_bulkSelected.size+' selected';
+}
+
+function bulkSelectAllToggle(masterCb) {
+  document.querySelectorAll('.bulk-cb').forEach(function(cb){
+    cb.checked=masterCb.checked;
+    var idx=parseInt(cb.dataset.idx);
+    if(masterCb.checked) _bulkSelected.add(idx); else _bulkSelected.delete(idx);
+  });
+  var c=document.getElementById('bulkCount'); if(c) c.textContent=_bulkSelected.size+' selected';
+}
+
+function bulkClear() {
+  _bulkSelected.clear();
+  document.querySelectorAll('.bulk-cb').forEach(function(cb){cb.checked=false;});
+  var c=document.getElementById('bulkCount'); if(c) c.textContent='0 selected';
+}
+
+function bulkTagPrompt() {
+  if(!_bulkSelected.size){toast('Select entries first.','er');return;}
+  var tag=prompt('Tag to add to all selected entries:');
+  if(!tag||!tag.trim()) return;
+  tag=tag.trim();
+  var all=JSON.parse(localStorage.getItem(RECORDS_KEY)||'[]');
+  _bulkSelected.forEach(function(idx){
+    if(!all[idx]) return;
+    var ex=(all[idx].tags||'').split(',').map(function(t){return t.trim();}).filter(Boolean);
+    if(!ex.includes(tag)) ex.push(tag);
+    all[idx].tags=ex.join(', ');
+  });
+  localStorage.setItem(RECORDS_KEY,JSON.stringify(all));
+  bulkClear(); renderCRM();
+  toast('\ud83c\udff7 Tag "'+tag+'" added.','ok');
+}
+
+function bulkAction(action) {
+  if(!_bulkSelected.size){toast('Select entries first.','er');return;}
+  var all=JSON.parse(localStorage.getItem(RECORDS_KEY)||'[]');
+  var idxArr=Array.from(_bulkSelected).sort(function(a,b){return b-a;});
+  if(action==='delete'){
+    if(!confirm('Delete '+_bulkSelected.size+' selected entries? Cannot be undone.')) return;
+    idxArr.forEach(function(idx){all.splice(idx,1);});
+    localStorage.setItem(RECORDS_KEY,JSON.stringify(all));
+    bulkClear(); renderCRM(); renderRecords(); renderTallyStrip();
+    renderFollowUpReminders(); renderRevenueSummary();
+    toast('\ud83d\uddd1 '+idxArr.length+' entries deleted.','ok');
+  } else if(action==='star'){
+    idxArr.forEach(function(idx){if(all[idx]) all[idx]._starred=true;});
+    localStorage.setItem(RECORDS_KEY,JSON.stringify(all));
+    bulkClear(); renderCRM();
+    toast('\u2b50 '+idxArr.length+' entries starred.','ok');
+  } else if(action==='archive'){
+    idxArr.forEach(function(idx){if(all[idx]) all[idx]._status='archived';});
+    localStorage.setItem(RECORDS_KEY,JSON.stringify(all));
+    bulkClear(); renderCRM();
+    toast('\ud83d\uddce '+idxArr.length+' entries archived.','ok');
+  } else if(action==='export'){
+    var sel=idxArr.map(function(idx){return all[idx];}).filter(Boolean);
+    var bk={version:1,exported:new Date().toISOString(),appName:'SoulSpark Resource Guide',records:sel};
+    var blob=new Blob([JSON.stringify(bk,null,2)],{type:'application/json'});
+    var a=document.createElement('a'); a.href=URL.createObjectURL(blob);
+    a.download='soulspark-selected-'+sel.length+'.json'; a.click();
+    bulkClear();
+    toast('\ud83d\udce6 '+sel.length+' entries exported.','ok');
+  }
+}
+
+// ── REVENUE SUMMARY ───────────────────────────────────────────────────────────
+function renderRevenueSummary() {
+  var panel = document.getElementById('homeRevenueSummary');
+  if(!panel) return;
+  var all = JSON.parse(localStorage.getItem(RECORDS_KEY)||'[]');
+  var shows = all.filter(function(r){ return r._section==='shows' && (parseFloat(r.sales_total)||0) > 0; });
+  if(!shows.length) { panel.style.display='none'; return; }
+  var totalSales = 0, totalExp = 0, totalNet = 0;
+  shows.forEach(function(r){
+    totalSales += parseFloat(r.sales_total)||0;
+    totalExp   += parseFloat(r.expenses_total)||0;
+    totalNet   += parseFloat(r.net_profit) || ((parseFloat(r.sales_total)||0) - (parseFloat(r.expenses_total)||0));
+  });
+  var best = shows.slice().sort(function(a,b){ return (parseFloat(b.net_profit)||0)-(parseFloat(a.net_profit)||0); })[0];
+  var bestName = best ? (best.event_name||best.name||'Unknown Event') : '—';
+  var bestNet  = best ? (parseFloat(best.net_profit)||0).toFixed(2) : '0';
+  panel.style.display = '';
+  panel.innerHTML =
+    '<div style="background:var(--card);border:1.5px solid var(--border);border-radius:12px;padding:12px 16px;">' +
+    '<div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--show);margin-bottom:10px;">💰 Revenue Overview — ' + shows.length + ' Event' + (shows.length!==1?'s':'') + '</div>' +
+    '<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:8px;">' +
+    '<div style="text-align:center;"><div style="font-size:18px;font-weight:700;color:var(--show);">$' + totalSales.toFixed(0) + '</div><div style="font-size:10px;color:var(--light);">Total Sales</div></div>' +
+    '<div style="text-align:center;"><div style="font-size:18px;font-weight:700;color:' + (totalNet>=0?'#2d7a3a':'#c0392b') + ';">$' + totalNet.toFixed(0) + '</div><div style="font-size:10px;color:var(--light);">Net Profit</div></div>' +
+    '<div style="text-align:center;"><div style="font-size:18px;font-weight:700;color:var(--ink);">$' + (shows.length?totalSales/shows.length:0).toFixed(0) + '</div><div style="font-size:10px;color:var(--light);">Avg/Event</div></div>' +
+    '</div>' +
+    '<div style="font-size:11px;color:var(--mid);">🏆 Best event: <strong>' + bestName + '</strong> ($' + bestNet + ' net)</div>' +
+    '</div>';
+}
+
+// ── FOLLOW-UP REMINDERS ────────────────────────────────────────────────────────
+function renderFollowUpReminders() {
+  var panel = document.getElementById('homeFollowUps');
+  if(!panel) return;
+  var all  = JSON.parse(localStorage.getItem(RECORDS_KEY)||'[]');
+  var today = new Date(); today.setHours(0,0,0,0);
+  var soon  = new Date(today); soon.setDate(soon.getDate() + 7);
+  var due = [];
+  all.forEach(function(r, idx) {
+    var fd = r.followup_date || r.ev_deadline || '';
+    if(!fd) return;
+    var d = new Date(fd + 'T00:00:00');
+    if(isNaN(d)) return;
+    var diff = Math.round((d - today) / 86400000);
+    if(diff <= 7) {
+      due.push({ r:r, idx:idx, diff:diff, d:d });
+    }
+  });
+  if(!due.length) { panel.style.display='none'; return; }
+  due.sort(function(a,b){ return a.diff - b.diff; });
+  panel.style.display = '';
+  panel.innerHTML = '<div style="background:var(--card);border:1.5px solid var(--eve);border-radius:12px;padding:12px 16px;">' +
+    '<div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--eve);margin-bottom:8px;">⏰ Follow-Up Reminders</div>' +
+    due.map(function(item) {
+      var name = getEntryName(item.r);
+      var sec  = item.r._section || '';
+      var label = item.diff < 0 ? '🔴 Overdue' : item.diff === 0 ? '🟡 Today' : item.diff <= 2 ? '🟠 ' + item.diff + 'd' : '🟢 ' + item.diff + 'd';
+      var dateStr = item.d.toLocaleDateString('en-US',{month:'short',day:'numeric'});
+      return '<div style="display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:1px solid var(--border);cursor:pointer;" onclick="userEditEntry(' + item.idx + ')">' +
+        '<span style="font-size:11px;font-weight:700;color:var(--eve);min-width:70px;">' + label + '</span>' +
+        '<span style="font-size:12px;font-weight:600;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">' + name + '</span>' +
+        '<span style="font-size:10px;color:var(--light);">' + sec + ' · ' + dateStr + '</span>' +
+        '</div>';
+    }).join('') +
+    '</div>';
+}
+
+// ── REVENUE TRACKER AUTO-CALC ─────────────────────────────────────────────────
+document.addEventListener('input', function(e) {
+  if(e.target.name === 'sales_total' || e.target.name === 'expenses_total') {
+    var form = e.target.closest('form');
+    if(!form) return;
+    var sales = parseFloat((form.querySelector('[name="sales_total"]')||{}).value)||0;
+    var exp   = parseFloat((form.querySelector('[name="expenses_total"]')||{}).value)||0;
+    var np = document.getElementById('showNetProfit');
+    if(np) { np.value = (sales - exp).toFixed(2); np.style.color = (sales-exp) >= 0 ? 'var(--show)' : '#c0392b'; }
+  }
+});
+
+// ── MOBILE TAB BAR ACTIVE STATE ───────────────────────────────────────────────
+function updateMobileTabBar(sec) {
+  document.querySelectorAll('.mobile-tab-btn').forEach(function(b){ b.classList.remove('active'); });
+  var btn = document.getElementById('mtb-' + sec);
+  if(btn) btn.classList.add('active');
+}
+
 // ── USER AUTH SYSTEM ──────────────────────────────────────────────────────────
+
 const USERS_KEY   = 'rg_users';      // {email: {name, pinHash, created}}
 const SESSION_KEY = 'rg_session';    // {email, name, token}
 
@@ -7056,7 +7627,7 @@ function userDeleteEntry(idx) {
   if(!confirm('Delete "' + (entry.name||entry.title||'this entry') + '"? This cannot be undone.')) return;
   all.splice(idx, 1);
   localStorage.setItem(RECORDS_KEY, JSON.stringify(all));
-  renderRecords(); renderCRM(); renderTallyStrip();
+  renderRecords(); renderCRM(); renderTallyStrip(); renderFollowUpReminders();
   toast('Entry deleted.', 'ok');
 }
 
@@ -7088,6 +7659,164 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }, 200);
 });
+
+// ── GLOBAL SEARCH ─────────────────────────────────────────────────────────────
+function renderGlobalSearch() {
+  var q = (document.getElementById('globalSearchInput').value || '').trim().toLowerCase();
+  var box = document.getElementById('globalSearchResults');
+  if(!q || q.length < 2) { box.style.display = 'none'; return; }
+  var all = JSON.parse(localStorage.getItem(RECORDS_KEY) || '[]');
+  var hits = all.filter(function(r) {
+    var haystack = Object.values(r).join(' ').toLowerCase();
+    return haystack.includes(q);
+  }).slice(0, 12);
+  if(!hits.length) {
+    box.style.display = 'block';
+    box.innerHTML = '<div style="padding:14px 16px;font-size:13px;color:var(--light);text-align:center;">No results for "' + q + '"</div>';
+    return;
+  }
+  box.style.display = 'block';
+  box.innerHTML = hits.map(function(r) {
+    var name = getEntryName(r);
+    var sec  = r._section || '';
+    var sc   = COLORS[sec] || '#888';
+    var lt   = LIGHTS[sec] || 'var(--border)';
+    var idx  = all.indexOf(r);
+    // Snippet: find matching field
+    var snippet = '';
+    Object.entries(r).forEach(function(kv) {
+      if(snippet || kv[0].startsWith('_') || kv[0].includes('b64')) return;
+      if(String(kv[1]).toLowerCase().includes(q) && kv[1] && kv[1] !== name) {
+        snippet = String(kv[1]).slice(0, 60);
+      }
+    });
+    return '<div onclick="globalSearchGo(' + idx + ',\'' + sec + '\')" ' +
+      'style="display:flex;align-items:center;gap:10px;padding:10px 16px;cursor:pointer;border-bottom:1px solid var(--border);transition:background .1s;" ' +
+      'onmouseenter="this.style.background=\'var(--warm)\'" onmouseleave="this.style.background=\'\'">' +
+      '<span style="background:' + lt + ';color:' + sc + ';font-size:10px;font-weight:700;padding:2px 8px;border-radius:10px;flex-shrink:0;">' + sec + '</span>' +
+      '<div style="min-width:0;"><div style="font-size:13px;font-weight:600;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">' + name + '</div>' +
+      (snippet ? '<div style="font-size:11px;color:var(--mid);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">' + snippet + '</div>' : '') +
+      '</div></div>';
+  }).join('');
+}
+function globalSearchGo(idx, sec) {
+  document.getElementById('globalSearchInput').value = '';
+  document.getElementById('globalSearchResults').style.display = 'none';
+  if(sec === 'people') {
+    var all = JSON.parse(localStorage.getItem(RECORDS_KEY) || '[]');
+    var people = all.filter(function(r){ return r._section === 'people'; });
+    var pi = people.indexOf(all[idx]);
+    go('people');
+    setTimeout(function(){ if(pi >= 0) showPersonDetail(pi); }, 300);
+  } else {
+    go(sec);
+    setTimeout(function(){ openEditEntry(idx); }, 300);
+  }
+}
+document.addEventListener('click', function(e) {
+  if(!e.target.closest('#globalSearchInput') && !e.target.closest('#globalSearchResults')) {
+    var box = document.getElementById('globalSearchResults');
+    if(box) box.style.display = 'none';
+  }
+});
+
+// ── TAG CLOUD ──────────────────────────────────────────────────────────────────
+function renderHomeTagCloud() {
+  var cloud = document.getElementById('homeTagCloud');
+  if(!cloud) return;
+  var all = JSON.parse(localStorage.getItem(RECORDS_KEY) || '[]');
+  var freq = {};
+  all.forEach(function(r) {
+    // Collect tags from modalities, tags, specialty_tags, role_tags, location
+    ['modalities','tags','specialty_tags','role_tags','location','exp_level'].forEach(function(k) {
+      if(!r[k]) return;
+      r[k].split(/[,;\/]/).forEach(function(t) {
+        t = t.trim();
+        if(t && t.length > 1 && t.length < 30) freq[t] = (freq[t]||0) + 1;
+      });
+    });
+  });
+  var sorted = Object.entries(freq).sort(function(a,b){ return b[1]-a[1]; }).slice(0, 20);
+  if(!sorted.length) { cloud.innerHTML = ''; return; }
+  var maxF = sorted[0][1];
+  cloud.innerHTML = sorted.map(function(kv) {
+    var sz = Math.round(10 + (kv[1]/maxF)*6);
+    var op = 0.5 + (kv[1]/maxF)*0.5;
+    return '<span onclick="document.getElementById(\'globalSearchInput\').value=\'' + kv[0].replace(/'/g,'') + '\';renderGlobalSearch();" ' +
+      'style="font-size:' + sz + 'px;opacity:' + op.toFixed(2) + ';cursor:pointer;color:var(--eve);' +
+      'background:var(--purple-l);padding:3px 10px;border-radius:12px;transition:opacity .15s;" ' +
+      'onmouseenter="this.style.opacity=1" onmouseleave="this.style.opacity=\'' + op.toFixed(2) + '\'">' +
+      kv[0] + ' <sup style="font-size:9px">' + kv[1] + '</sup></span>';
+  }).join('');
+}
+
+// ── DUPLICATE ENTRY WARNING ────────────────────────────────────────────────────
+function checkDuplicate(name, section) {
+  if(!name || name.length < 3) return null;
+  var all = JSON.parse(localStorage.getItem(RECORDS_KEY) || '[]');
+  var q = name.toLowerCase().trim();
+  return all.filter(function(r) {
+    if(r._section !== section) return false;
+    var n = getEntryName(r).toLowerCase();
+    return n === q || (n.length > 3 && (n.includes(q) || q.includes(n)));
+  });
+}
+
+// ── QUICK-ADD ─────────────────────────────────────────────────────────────────
+function openQuickAdd() { openMo('moQuickAdd'); }
+function quickGoTo(sec) {
+  closeMo('moQuickAdd');
+  go(sec);
+  setTimeout(function() {
+    var form = document.querySelector('#page-' + sec + ' form');
+    if(form) { var first = form.querySelector('input[type="text"],input[type="email"],textarea'); if(first) first.focus(); }
+  }, 350);
+}
+
+// ── PRINT PROFILE ─────────────────────────────────────────────────────────────
+function printPersonProfile(idx) {
+  var all = JSON.parse(localStorage.getItem(RECORDS_KEY) || '[]');
+  var people = all.filter(function(r){ return r._section === 'people'; });
+  var p = people[idx];
+  if(!p) return;
+  var photo = p.photo_b64 ? '<img src="data:' + (p.photo_mime||'image/jpeg') + ';base64,' + p.photo_b64 + '" style="width:100px;height:120px;object-fit:cover;border-radius:50% 50% 10px 10px;float:right;margin:0 0 12px 16px;">' : '';
+  var logo  = p.logo_b64  ? '<img src="data:' + (p.logo_mime||'image/jpeg')  + ';base64,' + p.logo_b64  + '" style="width:60px;height:60px;object-fit:contain;float:right;margin:0 0 8px 12px;">' : '';
+  var row = function(label, val) { return val ? '<tr><td style="font-weight:700;padding:4px 10px 4px 0;font-size:12px;color:#555;white-space:nowrap;vertical-align:top">' + label + '</td><td style="padding:4px 0;font-size:12px;color:#222">' + val + '</td></tr>' : ''; };
+  var socials = ['website','instagram','linktree','tiktok','facebook','linkedin','youtube'].map(function(k){ return p[k] ? (k.charAt(0).toUpperCase()+k.slice(1) + ': ' + p[k]) : ''; }).filter(Boolean).join(' · ');
+  var win = window.open('','_blank','width=700,height=900');
+  win.document.write('<!DOCTYPE html><html><head><title>Profile – ' + (p.name||'Unknown') + '</title>' +
+    '<style>body{font-family:Georgia,serif;color:#1e1a14;padding:40px;max-width:600px;margin:0 auto;background:#faf8f2;}' +
+    'h1{font-size:26px;margin:0 0 4px}h2{font-size:14px;font-weight:400;color:#7a7265;margin:0 0 8px}' +
+    '.badge{display:inline-block;background:#ede8ff;color:#5a2db8;border-radius:10px;padding:2px 10px;font-size:11px;font-weight:700;margin:2px;}' +
+    'hr{border:none;border-top:1px solid #e5e0d5;margin:14px 0}' +
+    '@media print{body{padding:20px}button{display:none!important}}' +
+    '</style></head><body>' +
+    '<button onclick="window.print()" style="float:right;padding:8px 16px;background:#5a2db8;color:#fff;border:none;border-radius:8px;cursor:pointer;font-size:13px;margin-bottom:10px;">🖨 Print</button>' +
+    photo + logo +
+    '<h1>' + (p.name||'Unknown') + '</h1>' +
+    '<h2>' + [p.role_title, p.org].filter(Boolean).join(' · ') + '</h2>' +
+    (p.pronouns ? '<div style="font-size:12px;color:#888;margin-bottom:8px;">' + p.pronouns + '</div>' : '') +
+    (p.bio ? '<div style="font-size:13px;color:#555;margin-bottom:12px;line-height:1.7;clear:right">' + p.bio + '</div>' : '') +
+    '<hr>' +
+    '<table style="width:100%;border-collapse:collapse">' +
+    row('📍 Location', p.location) +
+    row('📞 Phone', p.phone) +
+    row('✉ Email', p.email) +
+    row('🔮 Modalities', p.modalities) +
+    row('🌱 Experience', p.exp_level) +
+    row('🏷 Role Tags', p.role_tags) +
+    row('🏢 Org', p.org) +
+    row('🌐 Social', socials) +
+    row('🧠 MBTI', p.mbti) +
+    row('💫 HD Type', p.hd_type) +
+    row('☀ Sun Sign', p.sun_sign) +
+    row('⭐ Rating', p.rating ? '★'.repeat(parseInt(p.rating)||0) : '') +
+    '</table>' +
+    (p.collab_notes ? '<hr><div style="font-size:12px;color:#555"><strong>Collaboration Notes:</strong><br>' + p.collab_notes + '</div>' : '') +
+    '<hr><div style="font-size:10px;color:#aaa;text-align:center;margin-top:20px;">✦ SoulSpark Resource Guide · ' + new Date().toLocaleDateString() + '</div>' +
+    '</body></html>');
+  win.document.close();
+}
 
 // ── GUIDE MANDALA PREVIEW ──
 (function(){
