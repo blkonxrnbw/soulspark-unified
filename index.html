@@ -825,6 +825,59 @@ textarea{resize:vertical;line-height:1.6;min-height:72px}
 #toast.show.er{border-color:#c0392b;color:#c0392b}
 #tr{display:none;font-size:12px;margin-top:6px}
 #recordFilters{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px;align-items:center}
+
+/* ╔══════════════════════════════════════════════════╗
+   ║  SYNERGY ENGINE v1.0 — Unified Additions         ║
+   ╚══════════════════════════════════════════════════╝ */
+
+/* Astro-Sync glow on CRM people cards */
+@keyframes synergy-astro-glow {
+    0%,100% { box-shadow:0 0 10px 3px rgba(100,60,180,.35); border-color:#8b6ac8; }
+    50%      { box-shadow:0 0 24px 8px rgba(100,60,180,.6);  border-color:#7b55c0; }
+}
+[data-sun].astro-highlight {
+    animation: synergy-astro-glow 3s ease-in-out infinite !important;
+    border-color: #8b6ac8 !important;
+}
+[data-sun].astro-highlight::before {
+    content: '☉ ' attr(data-sun) ' Season';
+    position: absolute;
+    top: -1px;
+    right: 10px;
+    background: #8b6ac8;
+    color: #fff;
+    font-size: 9px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 0 0 8px 8px;
+    letter-spacing: .5px;
+    pointer-events: none;
+}
+
+/* Guest lock */
+.guest-lock {
+    filter: blur(6px) !important;
+    pointer-events: none !important;
+    user-select: none !important;
+    opacity: .4 !important;
+}
+
+/* Synergy badge */
+#unified-synergy-badge {
+    position: fixed;
+    bottom: 16px;
+    right: 16px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 4px 13px;
+    font-size: 11px;
+    color: var(--eve);
+    font-family: 'Jost', sans-serif;
+    z-index: 800;
+    pointer-events: none;
+    opacity: .85;
+}
 </style>
 </head>
 <body>
@@ -3610,6 +3663,17 @@ textarea{resize:vertical;line-height:1.6;min-height:72px}
   </div>
 
 <script>
+
+// ── SYNERGY: Auto-seed Apps Script URL & share via sessionStorage ─────────────
+(function() {
+  var SYNERGY_URL = 'https://script.google.com/macros/s/AKfycbzg5yEU77kQPmY3x1qbFORpwPqco9C3Oghj-vE7DN2NUbY7WTz-Vz8IPkW5Jg9Sm1o/exec';
+  if(!localStorage.getItem('rg_url')) localStorage.setItem('rg_url', SYNERGY_URL);
+  try {
+    sessionStorage.setItem('ss_mandala_sheet_url', SYNERGY_URL);
+    sessionStorage.setItem('ss_binder_sheet_url',  SYNERGY_URL);
+  } catch(e) {}
+})();
+
 const URL_KEY='rg_url', PIN_KEY='rg_admin_pin', RECORDS_KEY='rg_local', TRUSTED_PIN_KEY='rg_trusted_pin';
 const COLORS={"home": "#2d5a27", "guide": "#4a4a6a", "networking": "#2d5a27", "vendors": "#8b1a1a", "people": "#c47a1a", "shows": "#1f6670", "links": "#7a6040", "expos": "#1f6670", "modalities": "#5a2db8", "stores": "#a02020", "ideas": "#1a6090", "misc": "#8b3a10", "events": "#6b2fa0", "mandala": "#7c5cbf", "inbox": "#c0392b"};
 const LIGHTS={"home": "#e8f0e6", "guide": "#eeeef6", "networking": "#e8f0e6", "vendors": "#fce8e8", "people": "#fdf0dc", "shows": "#ddf0f3", "links": "#f5ede0", "expos": "#ddf0f3", "modalities": "#ede5ff", "stores": "#fce8e8", "ideas": "#ddeeff", "misc": "#fde8d8", "events": "#ede5ff", "mandala": "#ede5ff", "inbox": "#fce8e8"};
@@ -8261,6 +8325,125 @@ function printPersonProfile(idx) {
       if(p==='guide') setTimeout(gmBuild, 100);
     };
   }
+})();
+
+
+// ╔══════════════════════════════════════════════════════════╗
+// ║  SYNERGY ENGINE v1.0 — Unified HTML Additions           ║
+// ╚══════════════════════════════════════════════════════════╝
+
+// ── Zodiac season calculator ────────────────────────────────
+function getSynergyZodiacSeason() {
+    var now = new Date(), m = now.getMonth()+1, d = now.getDate();
+    if ((m===3&&d>=21)||(m===4&&d<=19)) return 'Aries';
+    if ((m===4&&d>=20)||(m===5&&d<=20)) return 'Taurus';
+    if ((m===5&&d>=21)||(m===6&&d<=20)) return 'Gemini';
+    if ((m===6&&d>=21)||(m===7&&d<=22)) return 'Cancer';
+    if ((m===7&&d>=23)||(m===8&&d<=22)) return 'Leo';
+    if ((m===8&&d>=23)||(m===9&&d<=22)) return 'Virgo';
+    if ((m===9&&d>=23)||(m===10&&d<=22)) return 'Libra';
+    if ((m===10&&d>=23)||(m===11&&d<=21)) return 'Scorpio';
+    if ((m===11&&d>=22)||(m===12&&d<=21)) return 'Sagittarius';
+    if ((m===12&&d>=22)||(m===1&&d<=19))  return 'Capricorn';
+    if ((m===1&&d>=20)||(m===2&&d<=18))   return 'Aquarius';
+    return 'Pisces';
+}
+
+// ── AstroSync: highlights people cards whose sun sign matches current season ──
+function applyUnifiedAstroSync() {
+    var season = getSynergyZodiacSeason();
+    var cards  = document.querySelectorAll('[data-sun]');
+    var count  = 0;
+    cards.forEach(function(el) {
+        var sun = (el.getAttribute('data-sun') || '').replace(/[♈-♓]/g,'').trim();
+        if (sun && sun.toLowerCase() === season.toLowerCase()) {
+            el.classList.add('astro-highlight'); count++;
+        } else {
+            el.classList.remove('astro-highlight');
+        }
+    });
+    // Synergy badge
+    var badge = document.getElementById('unified-synergy-badge');
+    if (badge) badge.textContent = '✦ Synergy · ☉ ' + season + (count ? ' · ' + count + ' in season' : '');
+}
+
+// ── Patch renderCRM to stamp data-attributes onto every people card ───────────
+// We wrap the original renderCRM so all new renders automatically carry
+// data-mbti, data-hd, data-sun attributes for Universal Search & AstroSync.
+(function() {
+    var _origRenderCRM = typeof renderCRM === 'function' ? renderCRM : null;
+    if (!_origRenderCRM) return;
+
+    window.renderCRM = function() {
+        _origRenderCRM.apply(this, arguments);
+        // After render, stamp data attributes on each card
+        var all = JSON.parse(localStorage.getItem('rg_contacts') ||
+                             localStorage.getItem('rg_records')  || '[]');
+        var cards = document.querySelectorAll('.rg-cards .crm-card, #crmCardsGrid .crm-card, .crm-card');
+        cards.forEach(function(card, i) {
+            var entry = all[i];
+            if (!entry) return;
+            if (entry.mbti)     card.setAttribute('data-mbti', entry.mbti);
+            if (entry.hd_type)  card.setAttribute('data-hd',   entry.hd_type);
+            if (entry.sun_sign) card.setAttribute('data-sun',  entry.sun_sign.replace(/[♈-♓]/g,'').trim());
+        });
+        applyUnifiedAstroSync();
+    };
+})();
+
+// ── Stamp data attributes on People-section submission cards too ──────────────
+function stampPeopleCards() {
+    var all = JSON.parse(localStorage.getItem(typeof RECORDS_KEY !== 'undefined' ? RECORDS_KEY : 'rg_records') || '[]');
+    var people = all.filter(function(r){ return r && r._section === 'people'; });
+    var cards  = document.querySelectorAll('.people-card[data-idx], .crm-card');
+    cards.forEach(function(card) {
+        var idx = parseInt(card.getAttribute('data-idx') || '-1', 10);
+        var entry = idx >= 0 ? people[idx] : null;
+        if (!entry) return;
+        if (entry.mbti)     card.setAttribute('data-mbti', entry.mbti);
+        if (entry.hd_type)  card.setAttribute('data-hd',   entry.hd_type);
+        if (entry.sun_sign) card.setAttribute('data-sun',  (entry.sun_sign||'').replace(/[♈-♓]/g,'').trim());
+    });
+    applyUnifiedAstroSync();
+}
+
+// ── Shared Fetch Hook: mirrors the mandala file's Google Sheet URL ────────────
+// The unified app reads its URL from localStorage key 'rg_api_url'.
+// The mandala reads it from the ?sheet= query param.
+// This bridge syncs them: if the mandala URL was set in session, copy it here.
+(function synergyURLBridge() {
+    try {
+        var mandalaURL = sessionStorage.getItem('ss_mandala_sheet_url');
+        if (mandalaURL) {
+            var URL_KEY = 'rg_api_url';
+            var existing = localStorage.getItem(URL_KEY);
+            if (!existing || existing !== mandalaURL) {
+                localStorage.setItem(URL_KEY, mandalaURL);
+                console.log('[Synergy] Mandala Sheet URL bridged to Unified app ✓');
+            }
+        }
+    } catch(e) {}
+})();
+
+// ── Boot: run AstroSync after page is ready ───────────────────────────────────
+document.addEventListener('DOMContentLoaded', function() {
+    setTimeout(function() { applyUnifiedAstroSync(); }, 800);
+    // Re-apply every time the section changes (unified uses tab switching)
+    var origShowPage = window.showPage;
+    if (typeof origShowPage === 'function') {
+        window.showPage = function(p) {
+            origShowPage.apply(this, arguments);
+            setTimeout(applyUnifiedAstroSync, 300);
+        };
+    }
+});
+
+// Badge HTML injection
+(function() {
+    var badge = document.createElement('div');
+    badge.id = 'unified-synergy-badge';
+    badge.textContent = '✦ Synergy Engine';
+    document.body.appendChild(badge);
 })();
 
 </script>
